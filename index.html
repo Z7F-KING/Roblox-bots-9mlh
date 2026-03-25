@@ -973,4 +973,39 @@ if __name__ == "__main__":
     }
 
     // Event Listeners
-    document.getElementById('sendBtn').addEventListener('click',
+    document.getElementById('sendBtn').addEventListener('click', handleSend);
+    document.getElementById('messageInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    });
+    document.getElementById('hamburgerBtn').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.add('open');
+    });
+    document.getElementById('closeSidebar').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.remove('open');
+    });
+    document.getElementById('newChatSidebar').addEventListener('click', () => {
+        createNewConversation();
+        document.getElementById('sidebar').classList.remove('open');
+    });
+    document.getElementById('deepThinkBtn').addEventListener('click', () => {
+        isDeepThinking = !isDeepThinking;
+        saveToLocal();
+        updateDeepButtonUI();
+        const status = isDeepThinking ? "✅ تم تفعيل التفكير العميق - راح أعطيك إجابات أعمق" : "❌ تم إلغاء التفكير العميق - رجعت للوضع الطبيعي";
+        const temp = document.createElement('div');
+        temp.className = 'message bot';
+        temp.innerHTML = `<div class="avatar"><i class="fas fa-robot"></i></div><div class="msg-content">${status}</div>`;
+        document.getElementById('chatContainer').appendChild(temp);
+        setTimeout(() => temp.remove(), 2000);
+    });
+
+    loadFromLocal();
+    renderConversationsList();
+    renderMessages();
+    updateDeepButtonUI();
+</script>
+</body>
+</html>
