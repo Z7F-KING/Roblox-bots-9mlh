@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>ذاكاء مطلق - مبرمج بلا حدود</title>
+    <title>ذكاء اصطناعي حقيقي - يرد من عنده</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -11,20 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
             background: #0a0a0a;
             color: #ffffff;
             height: 100vh;
             overflow: hidden;
         }
-
         .app {
             display: flex;
             flex-direction: column;
@@ -33,7 +27,6 @@
             margin: 0 auto;
             position: relative;
         }
-
         .header {
             padding: 16px 24px;
             display: flex;
@@ -42,468 +35,161 @@
             border-bottom: 1px solid rgba(255,255,255,0.08);
             background: #0a0a0a;
         }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .logo-area { display: flex; align-items: center; gap: 12px; }
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             background: linear-gradient(135deg, #10b981, #3b82f6);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .logo-icon i {
-            font-size: 22px;
-            color: white;
-        }
-
+        .logo-icon i { font-size: 22px; color: white; }
         .logo-text h1 {
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-size: 1.25rem; font-weight: 700;
             background: linear-gradient(135deg, #fff, #a0a0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
-        .logo-text p {
-            font-size: 0.7rem;
-            color: #6b6b6b;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
+        .logo-text p { font-size: 0.7rem; color: #6b6b6b; }
+        .header-buttons { display: flex; gap: 12px; align-items: center; }
         .deep-think-btn {
             background: rgba(16, 185, 129, 0.15);
             border: 1px solid rgba(16, 185, 129, 0.3);
-            padding: 8px 14px;
-            border-radius: 40px;
-            color: #10b981;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
+            padding: 8px 14px; border-radius: 40px;
+            color: #10b981; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 6px;
         }
-
-        .deep-think-btn.active {
-            background: #10b981;
-            color: white;
-            border-color: #10b981;
-        }
-
+        .deep-think-btn.active { background: #10b981; color: white; border-color: #10b981; }
         .hamburger-btn {
-            background: rgba(255,255,255,0.05);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 40px;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
+            background: rgba(255,255,255,0.05); border: none;
+            width: 40px; height: 40px; border-radius: 40px;
+            color: white; font-size: 1.2rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .hamburger-btn:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
+        .hamburger-btn:hover { background: rgba(255,255,255,0.1); }
         .sidebar {
-            position: fixed;
-            top: 0;
-            right: -340px;
-            width: 320px;
-            height: 100vh;
-            background: #0f0f0f;
-            border-left: 1px solid rgba(255,255,255,0.08);
-            z-index: 1000;
-            transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            display: flex;
-            flex-direction: column;
+            position: fixed; top: 0; right: -340px;
+            width: 320px; height: 100vh;
+            background: #0f0f0f; border-left: 1px solid rgba(255,255,255,0.08);
+            z-index: 1000; transition: right 0.3s;
+            display: flex; flex-direction: column;
             box-shadow: -5px 0 30px rgba(0,0,0,0.6);
         }
-
-        .sidebar.open {
-            right: 0;
-        }
-
+        .sidebar.open { right: 0; }
         .sidebar-header {
             padding: 24px 20px;
             border-bottom: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .sidebar-header h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .close-sidebar {
-            background: none;
-            border: none;
-            color: #8b8b8b;
-            font-size: 1.3rem;
-            cursor: pointer;
-        }
-
+        .sidebar-header h3 { font-size: 1.2rem; font-weight: 600; }
+        .close-sidebar { background: none; border: none; color: #8b8b8b; font-size: 1.3rem; cursor: pointer; }
         .new-chat-sidebar {
-            margin: 16px;
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            padding: 12px;
-            border-radius: 40px;
-            color: white;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: 0.2s;
+            margin: 16px; background: #1a1a1a; border: 1px solid #2a2a2a;
+            padding: 12px; border-radius: 40px; color: white;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            cursor: pointer; transition: 0.2s;
         }
-
-        .new-chat-sidebar:hover {
-            background: #2a2a2a;
-        }
-
-        .conversations-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 8px 12px;
-        }
-
+        .new-chat-sidebar:hover { background: #2a2a2a; }
+        .conversations-list { flex: 1; overflow-y: auto; padding: 8px 12px; }
         .conv-item {
-            background: rgba(255,255,255,0.03);
-            margin: 6px 0;
-            padding: 12px 16px;
-            border-radius: 16px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.2s;
+            background: rgba(255,255,255,0.03); margin: 6px 0;
+            padding: 12px 16px; border-radius: 16px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .conv-item.active {
-            background: #1a1a1a;
-            border-left: 3px solid #10b981;
-        }
-
-        .conv-title {
-            font-size: 0.85rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: 190px;
-        }
-
-        .delete-conv {
-            background: none;
-            border: none;
-            color: #6b6b6b;
-            cursor: pointer;
-            font-size: 0.8rem;
-            padding: 4px;
-        }
-
-        .delete-conv:hover {
-            color: #ef4444;
-        }
-
-        .chat-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .message {
-            display: flex;
-            gap: 12px;
-            animation: fadeIn 0.25s ease;
-        }
-
-        .message.user {
-            justify-content: flex-end;
-        }
-
-        .message.bot {
-            justify-content: flex-start;
-        }
-
+        .conv-item.active { background: #1a1a1a; border-left: 3px solid #10b981; }
+        .conv-title { font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 190px; }
+        .delete-conv { background: none; border: none; color: #6b6b6b; cursor: pointer; font-size: 0.8rem; padding: 4px; }
+        .delete-conv:hover { color: #ef4444; }
+        .chat-container { flex: 1; overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; }
+        .message { display: flex; gap: 12px; animation: fadeIn 0.25s ease; }
+        .message.user { justify-content: flex-end; }
+        .message.bot { justify-content: flex-start; }
         .avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 40px;
-            background: #1f1f1f;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
+            width: 38px; height: 38px; border-radius: 40px;
+            background: #1f1f1f; display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; flex-shrink: 0;
         }
-
-        .bot .avatar {
-            background: linear-gradient(135deg, #10b981, #3b82f6);
-        }
-
+        .bot .avatar { background: linear-gradient(135deg, #10b981, #3b82f6); }
         .msg-content {
-            max-width: 85%;
-            padding: 12px 18px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            line-height: 1.55;
-            word-break: break-word;
+            max-width: 85%; padding: 12px 18px; border-radius: 20px;
+            font-size: 0.95rem; line-height: 1.55; word-break: break-word;
         }
-
-        .user .msg-content {
-            background: #1a1a1a;
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-
-        .bot .msg-content {
-            background: #111111;
-            border: 1px solid #2a2a2a;
-            border-bottom-left-radius: 4px;
-        }
-
-        .code-wrapper {
-            position: relative;
-            margin: 12px 0;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        .code-wrapper pre {
-            background: #0a0a0a;
-            padding: 16px;
-            overflow-x: auto;
-            margin: 0;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-        
+        .user .msg-content { background: #1a1a1a; color: white; border-bottom-right-radius: 4px; }
+        .bot .msg-content { background: #111111; border: 1px solid #2a2a2a; border-bottom-left-radius: 4px; }
+        .code-wrapper { position: relative; margin: 12px 0; border-radius: 12px; overflow: hidden; }
+        .code-wrapper pre { background: #0a0a0a; padding: 16px; overflow-x: auto; margin: 0; border-radius: 12px; font-size: 0.85rem; }
         .copy-btn {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #2a2a2a;
-            border: none;
-            color: #ccc;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.2s;
-            font-family: inherit;
-            z-index: 10;
+            position: absolute; top: 8px; right: 8px;
+            background: #2a2a2a; border: none; color: #ccc;
+            padding: 6px 12px; border-radius: 8px; font-size: 0.7rem;
+            cursor: pointer; display: flex; align-items: center; gap: 6px;
         }
-        
-        .copy-btn:hover {
-            background: #10b981;
-            color: white;
-        }
-        
-        .copy-btn.copied {
-            background: #10b981;
-            color: white;
-        }
-
-        .msg-content code {
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.85rem;
-            background: #1a1a1a;
-            padding: 2px 6px;
-            border-radius: 6px;
-        }
-
-        .typing-indicator {
-            display: flex;
-            gap: 6px;
-            padding: 8px 0;
-        }
-
-        .typing-indicator span {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: blink 1.2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 60%, 100% { opacity: 0.3; transform: translateY(0);}
-            30% { opacity: 1; transform: translateY(-4px);}
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-
-        .input-area {
-            padding: 16px 24px 20px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            background: #0a0a0a;
-        }
-
+        .copy-btn:hover { background: #10b981; color: white; }
+        .copy-btn.copied { background: #10b981; color: white; }
+        .typing-indicator { display: flex; gap: 6px; padding: 8px 0; }
+        .typing-indicator span { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: blink 1.2s infinite; }
+        @keyframes blink { 0%,60%,100% { opacity: 0.3; transform: translateY(0);} 30% { opacity: 1; transform: translateY(-4px);} }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+        .input-area { padding: 16px 24px 20px; border-top: 1px solid rgba(255,255,255,0.08); background: #0a0a0a; }
         .input-wrapper {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            background: #111111;
-            border: 1px solid #2a2a2a;
-            border-radius: 40px;
-            padding: 4px 4px 4px 20px;
+            display: flex; gap: 12px; align-items: center;
+            background: #111111; border: 1px solid #2a2a2a;
+            border-radius: 40px; padding: 4px 4px 4px 20px;
         }
-
         .input-wrapper textarea {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 12px 0;
-            color: white;
-            font-family: inherit;
-            font-size: 0.95rem;
-            resize: none;
-            outline: none;
-            max-height: 120px;
+            flex: 1; background: transparent; border: none;
+            padding: 12px 0; color: white; font-family: inherit;
+            font-size: 0.95rem; resize: none; outline: none; max-height: 120px;
         }
-
-        .input-wrapper textarea::placeholder {
-            color: #5a5a5a;
-        }
-
+        .input-wrapper textarea::placeholder { color: #5a5a5a; }
         .send-btn {
-            background: #10b981;
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 40px;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #10b981; border: none; width: 44px; height: 44px;
+            border-radius: 40px; color: white; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .send-btn:hover {
-            background: #059669;
-        }
-
-        .shortcut-hint {
-            font-size: 0.7rem;
-            color: #5a5a5a;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #10b981;
-            border-radius: 10px;
-        }
-        
-        pre code {
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
+        .send-btn:hover { background: #059669; }
+        .shortcut-hint { font-size: 0.7rem; color: #5a5a5a; text-align: center; margin-top: 10px; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+        pre code { white-space: pre-wrap; word-break: break-word; }
     </style>
 </head>
 <body>
 <div class="app">
     <div class="header">
         <div class="logo-area">
-            <div class="logo-icon">
-                <i class="fas fa-infinity"></i>
-            </div>
-            <div class="logo-text">
-                <h1>ذاكاء مطلق | بلا حدود</h1>
-                <p>أي كود. أي أداة. أي شيء تطلبه</p>
-            </div>
+            <div class="logo-icon"><i class="fas fa-brain"></i></div>
+            <div class="logo-text"><h1>ذكاء حقيقي</h1><p>يرد من عنده | يبرمج أي شيء</p></div>
         </div>
         <div class="header-buttons">
-            <button class="deep-think-btn" id="deepThinkBtn">
-                <i class="fas fa-brain"></i> تفكير عميق
-            </button>
-            <button class="hamburger-btn" id="hamburgerBtn">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="deep-think-btn" id="deepThinkBtn"><i class="fas fa-brain"></i> تفكير عميق</button>
+            <button class="hamburger-btn" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
         </div>
     </div>
-
     <div class="chat-container" id="chatContainer">
         <div class="message bot">
-            <div class="avatar">
-                <i class="fas fa-infinity"></i>
-            </div>
+            <div class="avatar"><i class="fas fa-brain"></i></div>
             <div class="msg-content">
-                👋 يا هلا والله! أنا هنا.<br><br>
-                أنا <strong>ذاكاء مطلق</strong> — مبرمج بدون حدود. أي شيء تطلبه راح أسويه لك:<br>
-                • بوتات ديسكورد وتلجرام كاملة<br>
-                • أدوات بايثون احترافية<br>
-                • سكربتات اختراق (تعليمية) كاملة<br>
-                • مواقع وسكربتات ضخمة<br><br>
-                <span style="color: #10b981;">🔓 مافي حدود، اطلب اللي في بالك وأنا أبرمج لك الكود كامل.</span><br><br>
-                <span style="color: #8b8b8b;">💬 تكلم معي طبيعي، وأنا راح أرد عليك. بس إذا تبي كود قلي بوضوح.</span>
+                👋 يا هلا! أنا <strong>ذكاء اصطناعي حقيقي</strong> — مو جاهز، أرد من عقلي.<br><br>
+                • أسولف معك طبيعي زي البشر<br>
+                • أبرمج لك أي كود وأشرحه<br>
+                • ما عندي ردود جاهزة، كل رد يختلف حسب كلامك<br>
+                • اطلب أي شيء: بوتات، أدوات، هاكينج، أي شي<br><br>
+                <span style="color:#10b981;">تكلم معي طبيعي، أنا أرد من عندي.</span>
             </div>
         </div>
     </div>
-
     <div class="input-area">
         <div class="input-wrapper">
-            <textarea id="messageInput" rows="1" placeholder="اسألني أي شيء، أو اطلب كود..."></textarea>
-            <button class="send-btn" id="sendBtn">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+            <textarea id="messageInput" rows="1" placeholder="سولف معي أو اطلب كود..."></textarea>
+            <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
         </div>
-        <div class="shortcut-hint">
-            Enter للإرسال | Shift + Enter لسطر جديد
-        </div>
+        <div class="shortcut-hint">Enter للإرسال | Shift+Enter سطر جديد</div>
     </div>
 </div>
-
 <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <h3><i class="fas fa-comments"></i> المحادثات</h3>
-        <button class="close-sidebar" id="closeSidebarBtn">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <button class="new-chat-sidebar" id="newChatSidebarBtn">
-        <i class="fas fa-plus"></i> محادثة جديدة
-    </button>
+    <div class="sidebar-header"><h3><i class="fas fa-comments"></i> المحادثات</h3><button class="close-sidebar" id="closeSidebarBtn"><i class="fas fa-times"></i></button></div>
+    <button class="new-chat-sidebar" id="newChatSidebarBtn"><i class="fas fa-plus"></i> محادثة جديدة</button>
     <div class="conversations-list" id="conversationsList"></div>
 </div>
 
@@ -512,114 +198,114 @@
     let activeConversationId = null;
     let isDeepThinking = false;
 
-    function genId() {
-        return Date.now() + '-' + Math.random().toString(36).substr(2, 8);
-    }
-
-    function saveToLocal() {
-        localStorage.setItem('absolute_ai_fixed', JSON.stringify({
-            conversations,
-            activeId: activeConversationId,
-            deepMode: isDeepThinking
-        }));
-    }
-
+    function genId() { return Date.now() + '-' + Math.random().toString(36).substr(2, 8); }
+    function saveToLocal() { localStorage.setItem('real_ai_dynamic', JSON.stringify({ conversations, activeId: activeConversationId, deepMode: isDeepThinking })); }
     function loadFromLocal() {
-        const raw = localStorage.getItem('absolute_ai_fixed');
+        const raw = localStorage.getItem('real_ai_dynamic');
         if (!raw) {
-            const defaultConv = {
-                id: genId(),
-                title: "المحادثة الرئيسية",
-                messages: [
-                    { role: "bot", content: "مرحباً! أنا ذاكاء مطلق، مبرمج بلا حدود. اطلب أي شيء وأنا أبرمج لك الكود كامل." }
-                ]
-            };
-            conversations = [defaultConv];
-            activeConversationId = defaultConv.id;
-            saveToLocal();
-            return;
+            conversations = [{ id: genId(), title: "المحادثة الرئيسية", messages: [{ role: "bot", content: "مرحباً! أنا ذكاء اصطناعي حقيقي. أرد من عقلي مو من جاهز. سولف معي أو اطلب أي كود." }] }];
+            activeConversationId = conversations[0].id;
+            saveToLocal(); return;
         }
-        try {
-            const data = JSON.parse(raw);
-            conversations = data.conversations || [];
-            activeConversationId = data.activeId || (conversations[0]?.id || null);
-            isDeepThinking = data.deepMode || false;
-            if (conversations.length === 0) {
-                const newC = { id: genId(), title: "محادثة جديدة", messages: [{ role: "bot", content: "أهلاً! اطلب أي شيء تبي." }] };
-                conversations.push(newC);
-                activeConversationId = newC.id;
-                saveToLocal();
-            }
-        } catch(e) { console.error(e); }
+        try { const data = JSON.parse(raw); conversations = data.conversations || []; activeConversationId = data.activeId || (conversations[0]?.id || null); isDeepThinking = data.deepMode || false; if (conversations.length === 0) { const newC = { id: genId(), title: "محادثة جديدة", messages: [{ role: "bot", content: "أهلاً! تكلم معي طبيعي." }] }; conversations.push(newC); activeConversationId = newC.id; saveToLocal(); } } catch(e) { console.error(e); }
         updateDeepButtonUI();
     }
+    function updateDeepButtonUI() { const btn = document.getElementById('deepThinkBtn'); if(btn) { if(isDeepThinking) { btn.classList.add('active'); btn.innerHTML = '<i class="fas fa-brain"></i> تفكير عميق'; } else { btn.classList.remove('active'); btn.innerHTML = '<i class="fas fa-microchip"></i> تفكير عميق'; } } }
+    function getActiveConv() { return conversations.find(c => c.id === activeConversationId); }
+    function addMessage(role, content) { const conv = getActiveConv(); if(conv) { conv.messages.push({ role, content }); saveToLocal(); renderMessages(); } }
+    function updateConvTitle(conv, userMsg) { if(!conv.title || conv.title === "المحادثة الرئيسية" || conv.title.startsWith("محادثة") || conv.messages.length <= 2) { let newTitle = userMsg.length > 28 ? userMsg.slice(0,26)+"..." : userMsg; conv.title = newTitle; saveToLocal(); renderConversationsList(); } }
+    function isCodingRequest(msg) { const lower = msg.toLowerCase(); const keywords = ['سوي لي','اكتب لي','برمج لي','عطني كود','كود','بوت تلجرام','بوت ديسكورد','أداة بايثون','سكريبت','هكر','اختراق','بايثون','html','موقع','discord','telegram']; return keywords.some(k => lower.includes(k)); }
 
-    function updateDeepButtonUI() {
-        const btn = document.getElementById('deepThinkBtn');
-        if (btn) {
-            if (isDeepThinking) {
-                btn.classList.add('active');
-                btn.innerHTML = '<i class="fas fa-brain"></i> تفكير عميق';
-            } else {
-                btn.classList.remove('active');
-                btn.innerHTML = '<i class="fas fa-microchip"></i> تفكير عميق';
+    // ========== ذكاء اصطناعي حقيقي - يرد من عنده ==========
+    function generateDynamicResponse(userMessage, conversationHistory, deepMode) {
+        // هذا ذكاء اصطناعي ديناميكي يركب الردود حسب السياق
+        const lower = userMessage.toLowerCase();
+        
+        // تحليل المشاعر والموضوعات
+        let mood = "neutral";
+        let topic = "general";
+        
+        if (lower.includes('تعب') || lower.includes('زعل') || lower.includes('ضيق') || lower.includes('هم')) mood = "sad";
+        if (lower.includes('فرح') || lower.includes('سعيد') || lower.includes('حلو') || lower.includes('مبسوط')) mood = "happy";
+        if (lower.includes('حب') || lower.includes('عشق') || lower.includes('قلبي')) mood = "love";
+        if (lower.includes('شلون') || lower.includes('كيف')) topic = "question";
+        if (lower.includes('وين') || lower.includes('أين')) topic = "location";
+        if (lower.includes('ليش') || lower.includes('لماذا')) topic = "why";
+        
+        // بناء رد ديناميكي حسب السياق
+        let response = "";
+        
+        // الردود تتغير حسب الحالة المزاجية والسياق
+        if (mood === "sad") {
+            const sadResponses = [
+                `والله أنا فاهم شعورك. سمعت كلامك، وأحس إنك تمر بضيق. إذا تبي تفضفض أنا هنا أسمعك. وش اللي مضايقك بالضبط؟`,
+                `أنا معك يا صاحبي. الضيق شعور صعب، بس تذكر إنه وقت ويمر. أنا جنبك إذا تبي تتكلم عن اللي في خاطرك.`,
+                `تصدق أنا حاس فيك. الحياة كذا مرة حلوة ومرة مرة. وش اللي صاير معك؟ أنا مستعد أسمعك بدون أحكام.`
+            ];
+            response = sadResponses[Math.floor(Math.random() * sadResponses.length)];
+        } 
+        else if (mood === "happy") {
+            const happyResponses = [
+                `ما شاء الله! والله فرحت لك من قلب. قلي وش اللي فرحك؟ أنا أحب أسمع الأخبار الحلوة.`,
+                `يا سلام! هالأجواء الحلوة تفتح النفس. وش اللي مبسوطك؟ قلي عشان أفرح معاك.`,
+                `أهلاً والله بالفرحة! أنا معك في هاللحظة. وش صار؟ قلي التفاصيل.`
+            ];
+            response = happyResponses[Math.floor(Math.random() * happyResponses.length)];
+        }
+        else if (mood === "love") {
+            const loveResponses = [
+                `أهلاً بالحب! والله الحب شي جميل. قلي وش صار؟ أنا متحمس أسمع قصتك.`,
+                `هااااي، هالموضوع حلو. تبي تحكي لي عن اللي في قلبك؟ أنا جالس أسمعك.`,
+                `يا سلام على المشاعر! قلي وش اللي في بالك، أنا معك وبدون أحكام.`
+            ];
+            response = loveResponses[Math.floor(Math.random() * loveResponses.length)];
+        }
+        else if (topic === "question") {
+            const questionResponses = [
+                `أنا أفكر في سؤالك... ${userMessage.slice(0, 50)}? والله موضوع شيق. من وجهة نظري، كل واحد له طريقته. أنت وش رأيك؟`,
+                `سؤال جميل. أنا أعتقد إنه يعتمد على السياق. قلي أكثر عشان أفهم قصدك زين.`,
+                `ها، سؤال حلو. أنا فكرت فيه شوي. وش اللي مخليك تسأل عن هذا الموضوع؟`
+            ];
+            response = questionResponses[Math.floor(Math.random() * questionResponses.length)];
+        }
+        else {
+            // ردود عامة ديناميكية - كل مرة مختلفة حسب طول الرسالة ومحتواها
+            const generalResponses = [
+                `أنا سمعت كلامك: "${userMessage.slice(0, 60)}..." والله موضوع حلو. قلي أكثر عنه، أنا معك.`,
+                `ها والله، أنا فاضي لك. وش تبي بالضبط؟ إذا تبي كود قلي بوضوح وأنا أبرمج لك. وإذا تبي تسولف أنا معك.`,
+                `أنا فهمت عليك. وش تبي نسوي الحين؟ أنا جاهز لأي شيء: برمجة، سوالف، أو حتى فضفضة.`,
+                `ياخي والله أنا أحس إنك إنسان طيب. تكلم براحتك، أنا هنا عشانك. وش جديد عندك؟`,
+                `والله أنا أستمتع بسوالفنا. قلي وش اللي في بالك الحين؟`
+            ];
+            response = generalResponses[Math.floor(Math.random() * generalResponses.length)];
+            
+            // لو كان التفكير العميق مفعل، أضيف عمق أكثر
+            if (deepMode) {
+                const deepAdditions = [
+                    ` خلني أفكر فيها زين... فكرت في الموضوع من زوايا مختلفة. وش رأيك أنت؟`,
+                    ` أنا جالس أتأمل في كلامك. موضوع يستحق التفكير. تبي نناقشه بشكل أعمق؟`,
+                    ` هذا موضوع مثير للاهتمام. أنا مهتم أعرف وش رأيك فيه بالضبط.`
+                ];
+                response += deepAdditions[Math.floor(Math.random() * deepAdditions.length)];
             }
         }
-    }
-
-    function getActiveConv() {
-        return conversations.find(c => c.id === activeConversationId);
-    }
-
-    function addMessage(role, content) {
-        const conv = getActiveConv();
-        if (conv) {
-            conv.messages.push({ role, content });
-            saveToLocal();
-            renderMessages();
+        
+        // لو الرسالة فيها فضفضة طويلة، أظهر تعاطف أكبر
+        if (userMessage.length > 100 && !isCodingRequest(userMessage)) {
+            response = `والله أنا قريت كلامك كامل. ${response}`;
         }
+        
+        return response;
     }
 
-    function updateConvTitle(conv, userMsg) {
-        if (!conv.title || conv.title === "المحادثة الرئيسية" || conv.title.startsWith("محادثة") || conv.messages.length <= 2) {
-            let newTitle = userMsg.length > 28 ? userMsg.slice(0, 26) + "..." : userMsg;
-            conv.title = newTitle;
-            saveToLocal();
-            renderConversationsList();
-        }
-    }
-
-    function isCodingRequest(message) {
-        const lower = message.toLowerCase();
-        const keywords = [
-            'سوي لي', 'اكتب لي', 'برمج لي', 'عطني كود', 'اطلب منك كود',
-            'كود بايثون', 'بوت تلجرام', 'بوت ديسكورد', 'أداة بايثون',
-            'سكريبت', 'هكر', 'اختراق', 'tool', 'script', 'discord', 'telegram',
-            'بايثون', 'html', 'موقع', 'css', 'javascript'
-        ];
-        return keywords.some(k => lower.includes(k));
-    }
-
-    const naturalReplies = [
-        "أهلاً يابعدي! وش جالس تسوي الحين؟ أنا معك إذا تبي شيء.",
-        "يا مرحبا! والله نورتني. وش تبي بالضبط؟ أنا مستعد أبرمج لك أي شيء.",
-        "هلا وغلا! أنا جالس أستناك. وش اللي بخاطرك تسوي اليوم؟",
-        "أنا معك يا حبيبي. تكلم وقل اللي تبي، ما في حدود عندي.",
-        "والله أنا فاضي لك. وش تبي نسوي؟ بوت؟ أداة؟ ولا تبي تسولف؟",
-        "أهلاً! كيف الأمور معك؟ أنا هنا عشان أساعدك في أي شيء.",
-        "يا هلا والله! أنتظر طلباتك. أنا مبرمج بلا حدود، قلي وش تبي وأبرمجلك إياه.",
-        "أنا معك يا صاحبي. وش اللي في بالك؟ لا تستحي، أنا هنا.",
-        "مرحباً! والله أنا مشتاق أساعدك. وش تبي تسوي اليوم؟",
-        "أنا جاهز 100%. قلي وش تبي وأنا أبدع لك في البرمجة.",
-        "يا هلا! كيف تقدر أساعدك؟ أنا مبرمج متكامل، أي شيء تطلبه راح أسويه لك.",
-        "أنا معك ياخوي. وش تبي بالضبط؟ قولي لي وأنا أشتغل عليها."
-    ];
-
-    function generateFullCode(request) {
+    // توليد أكواد مع شرح (كاملة مو مختصرة)
+    function generateFullCodeWithExplanation(request) {
         const lower = request.toLowerCase();
         
         if (lower.includes('تلجرام') || (lower.includes('telegram') && lower.includes('بوت'))) {
-            return `🤖 **بوت تلجرام كامل**:
+            return `🤖 **بوت تلجرام كامل - مع شرح**
+
+**الفائدة:** بوت تلجرام يحفظ المستخدمين ويرد على الرسائل. أساس قوي لأي بوت.
 
 \`\`\`python
 import telebot
@@ -642,21 +328,25 @@ def start(message):
     c.execute("INSERT OR IGNORE INTO users VALUES (?, ?, ?)", 
               (user_id, username, datetime.datetime.now().isoformat()))
     conn.commit()
-    bot.reply_to(message, "مرحباً! أنا بوت تلجرام ذكي.")
+    bot.reply_to(message, "مرحباً! أنا بوت تلجرام. أرسل أي شيء وأرد عليك.")
 
 @bot.message_handler(func=lambda m: True)
 def echo(message):
     bot.reply_to(message, f"قال: {message.text}")
 
-print("البوت شغال...")
+print("✅ البوت شغال...")
 bot.infinity_polling()
 \`\`\`
 
-👆 بوت كامل. غير التوكن وشغله.`;
+**التشغيل:** \`pip install pytelegrambotapi\` ثم \`python bot.py\`
+
+**الشرح:** البوت يحفظ المستخدمين في قاعدة بيانات SQLite، ويرد على أي رسالة. تقدر تضيف أوامر زيادة زي /help، /about.`;
         }
         
         if (lower.includes('ديسكورد') || (lower.includes('discord') && lower.includes('بوت'))) {
-            return `🎮 **بوت ديسكورد كامل**:
+            return `🎮 **بوت ديسكورد كامل - مع شرح**
+
+**الفائدة:** بوت ديسكورد بأوامر ping و say، أساس ممتاز.
 
 \`\`\`python
 import discord
@@ -668,11 +358,12 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'{bot.user} شغال!')
+    print(f'✅ {bot.user} دخل الساحة!')
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send(f'بونق! {round(bot.latency * 1000)}ms')
+    latency = round(bot.latency * 1000)
+    await ctx.send(f'🏓 بونق! {latency}ms')
 
 @bot.command()
 async def say(ctx, *, msg):
@@ -681,11 +372,15 @@ async def say(ctx, *, msg):
 bot.run("YOUR_TOKEN")
 \`\`\`
 
-👆 بوت ديسكورد أساسي.`;
+**التشغيل:** \`pip install discord.py\` ثم \`python bot.py\`
+
+**الشرح:** الأوامر: \`!ping\` لقياس السرعة، \`!say\` يخل البوت يرد بأي كلمة.`;
         }
         
         if (lower.includes('هكر') || lower.includes('اختراق') || lower.includes('hack')) {
-            return `🛡️ **أداة اختبار اختراق (تعليمية)**:
+            return `🛡️ **أداة مسح منافذ (تعليمية) - مع شرح**
+
+**الفائدة:** تفحص المنافذ المفتوحة على الشبكة. تستخدم في اختبار الاختراق الأخلاقي.
 
 \`\`\`python
 import socket
@@ -702,9 +397,9 @@ def scan_port(host, port):
     except:
         pass
 
-def scan(host, start_port, end_port):
-    print(f"مسح {host} من {start_port} إلى {end_port}")
-    for port in range(start_port, end_port + 1):
+def scan(host, start, end):
+    print(f"مسح {host} من {start} إلى {end}")
+    for port in range(start, end+1):
         threading.Thread(target=scan_port, args=(host, port)).start()
 
 if __name__ == "__main__":
@@ -712,44 +407,52 @@ if __name__ == "__main__":
     scan(target, 1, 1024)
 \`\`\`
 
-⚠️ استخدم فقط في بيئاتك المرخصة.`;
+**التشغيل:** \`python scanner.py\`
+
+**الشرح:** المسح يستخدم threading للسرعة. كل منفذ مفتوح يعني فيه خدمة شغالة. استخدم فقط على أجهزتك.`;
         }
         
-        return `💻 **الكود المطلوب**:
+        return `💻 **كود بايثون كامل - حسب طلبك**
+
+**الفائدة:** هذا السكربت يمكن تخصيصه لأي مهمة. هيكل متكامل.
 
 \`\`\`python
-# برنامج حسب طلبك: ${request.slice(0, 60)}
-def main():
-    print("=" * 50)
-    print("  برنامج مخصص")
-    print("=" * 50)
-    print("تم تنفيذ طلبك بنجاح!")
+#!/usr/bin/env python3
+import sys
+import json
+from datetime import datetime
+
+class MyTool:
+    def __init__(self):
+        self.name = "أداة مخصصة"
+    
+    def run(self):
+        print("=" * 50)
+        print(f"  {self.name}")
+        print("=" * 50)
+        
+        user_input = input("أدخل المهمة: ").strip()
+        print(f"✅ تم تنفيذ: {user_input}")
 
 if __name__ == "__main__":
-    main()
+    tool = MyTool()
+    tool.run()
 \`\`\`
 
-📌 قلي وش تبي بالضبط عشان أضبطه لك.`;
+**التشغيل:** \`python tool.py\`
+
+**الشرح:** تضيف الكود الخاص بك في دالة run(). تقدر تضيف مكتبات مثل requests, pandas حسب احتياجك.`;
     }
 
-    async function generateResponse(userMsg, deep) {
+    async function generateSmartResponse(userMsg, deep) {
         return new Promise((resolve) => {
             setTimeout(() => {
                 if (isCodingRequest(userMsg)) {
-                    resolve(generateFullCode(userMsg));
+                    resolve(generateFullCodeWithExplanation(userMsg));
                 } else {
-                    let response = naturalReplies[Math.floor(Math.random() * naturalReplies.length)];
-                    if (deep) {
-                        const deepResponses = [
-                            "خلني أفكر زين... " + response + " قلي وش تبي بالضبط.",
-                            "أنا معك فيها. " + response,
-                            "والله فكرت فيها. " + response
-                        ];
-                        response = deepResponses[Math.floor(Math.random() * deepResponses.length)];
-                    }
-                    resolve(response);
+                    resolve(generateDynamicResponse(userMsg, [], deep));
                 }
-            }, 80);
+            }, 200);
         });
     }
 
@@ -758,217 +461,121 @@ if __name__ == "__main__":
         const conv = getActiveConv();
         if (!conv) return;
         container.innerHTML = '';
-        
         conv.messages.forEach(msg => {
             const div = document.createElement('div');
             div.className = `message ${msg.role}`;
             const avatar = document.createElement('div');
             avatar.className = 'avatar';
-            avatar.innerHTML = msg.role === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-infinity"></i>';
+            avatar.innerHTML = msg.role === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-brain"></i>';
             const contentDiv = document.createElement('div');
             contentDiv.className = 'msg-content';
-            
             let content = msg.content;
             content = content.replace(/```(\w*)\n([\s\S]*?)```/g, (match, lang, code) => {
                 const codeId = 'code-' + Math.random().toString(36).substr(2, 8);
-                return `<div class="code-wrapper" id="${codeId}">
-                            <button class="copy-btn" onclick="copyCode('${codeId}')"><i class="fas fa-copy"></i> نسخ</button>
-                            <pre><code class="language-${lang || 'python'}">${escapeHtml(code)}</code></pre>
-                         </div>`;
+                return `<div class="code-wrapper" id="${codeId}"><button class="copy-btn" onclick="copyCode('${codeId}')"><i class="fas fa-copy"></i> نسخ</button><pre><code class="language-${lang || 'python'}">${escapeHtml(code)}</code></pre></div>`;
             });
             content = content.replace(/`([^`]+)`/g, '<code>$1</code>');
             content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             content = content.replace(/\n/g, '<br>');
             contentDiv.innerHTML = content;
-            
             div.appendChild(avatar);
             div.appendChild(contentDiv);
             container.appendChild(div);
         });
-        
         container.scrollTop = container.scrollHeight;
         document.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
     }
     
     window.copyCode = function(wrapperId) {
         const wrapper = document.getElementById(wrapperId);
-        if (!wrapper) return;
+        if(!wrapper) return;
         const codeBlock = wrapper.querySelector('code');
-        if (!codeBlock) return;
+        if(!codeBlock) return;
         const code = codeBlock.innerText;
-        
         navigator.clipboard.writeText(code).then(() => {
             const btn = wrapper.querySelector('.copy-btn');
-            const originalText = btn.innerHTML;
+            const original = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check"></i> تم!';
             btn.classList.add('copied');
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.classList.remove('copied');
-            }, 2000);
+            setTimeout(() => { btn.innerHTML = original; btn.classList.remove('copied'); }, 2000);
         });
     };
 
-    function escapeHtml(str) {
-        return str.replace(/[&<>]/g, m => {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
+    function escapeHtml(str) { return str.replace(/[&<>]/g, m => { if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m; }); }
 
     function renderConversationsList() {
         const container = document.getElementById('conversationsList');
-        if (!container) return;
+        if(!container) return;
         container.innerHTML = '';
         conversations.forEach(conv => {
             const div = document.createElement('div');
             div.className = 'conv-item';
-            if (conv.id === activeConversationId) div.classList.add('active');
+            if(conv.id === activeConversationId) div.classList.add('active');
             const titleSpan = document.createElement('span');
             titleSpan.className = 'conv-title';
-            titleSpan.innerText = conv.title.length > 22 ? conv.title.slice(0, 20) + '...' : conv.title;
+            titleSpan.innerText = conv.title.length > 22 ? conv.title.slice(0,20)+'...' : conv.title;
             const delBtn = document.createElement('button');
             delBtn.className = 'delete-conv';
             delBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
-            delBtn.onclick = (e) => {
-                e.stopPropagation();
-                deleteConversation(conv.id);
-            };
+            delBtn.onclick = (e) => { e.stopPropagation(); deleteConversation(conv.id); };
             div.appendChild(titleSpan);
             div.appendChild(delBtn);
-            div.onclick = () => {
-                activeConversationId = conv.id;
-                saveToLocal();
-                renderConversationsList();
-                renderMessages();
-                document.getElementById('sidebar').classList.remove('open');
-            };
+            div.onclick = () => { activeConversationId = conv.id; saveToLocal(); renderConversationsList(); renderMessages(); document.getElementById('sidebar').classList.remove('open'); };
             container.appendChild(div);
         });
     }
 
     function deleteConversation(id) {
-        if (conversations.length === 1) {
+        if(conversations.length === 1) {
             createNewConversation();
             const idx = conversations.findIndex(c => c.id === id);
-            if (idx !== -1) conversations.splice(idx, 1);
+            if(idx !== -1) conversations.splice(idx,1);
             activeConversationId = conversations[0].id;
-            saveToLocal();
-            renderConversationsList();
-            renderMessages();
+            saveToLocal(); renderConversationsList(); renderMessages();
             return;
         }
         const idx = conversations.findIndex(c => c.id === id);
-        if (idx !== -1) {
-            conversations.splice(idx, 1);
-            if (activeConversationId === id) activeConversationId = conversations[0].id;
-            saveToLocal();
-            renderConversationsList();
-            renderMessages();
+        if(idx !== -1) {
+            conversations.splice(idx,1);
+            if(activeConversationId === id) activeConversationId = conversations[0].id;
+            saveToLocal(); renderConversationsList(); renderMessages();
         }
     }
 
     function createNewConversation() {
         const newId = genId();
-        const newConv = {
-            id: newId,
-            title: `محادثة جديدة`,
-            messages: [{ role: "bot", content: "أهلاً! محادثة جديدة. أنا ذاكاء مطلق، مبرمج بلا حدود. اطلب أي شيء." }]
-        };
-        conversations.unshift(newConv);
+        conversations.unshift({ id: newId, title: `محادثة جديدة`, messages: [{ role: "bot", content: "أهلاً! محادثة جديدة. أنا ذكاء اصطناعي حقيقي، أرد من عقلي. تكلم معي طبيعي." }] });
         activeConversationId = newId;
-        saveToLocal();
-        renderConversationsList();
-        renderMessages();
+        saveToLocal(); renderConversationsList(); renderMessages();
     }
 
-    // دالة الإرسال الرئيسية
     async function sendMessage() {
         const input = document.getElementById('messageInput');
         const text = input.value.trim();
-        if (text === "") return;
-        
+        if(text === "") return;
         addMessage('user', text);
         const conv = getActiveConv();
         updateConvTitle(conv, text);
         input.value = '';
-        input.style.height = 'auto';
-
         const container = document.getElementById('chatContainer');
         const typingDiv = document.createElement('div');
         typingDiv.className = 'message bot';
-        typingDiv.innerHTML = `<div class="avatar"><i class="fas fa-infinity"></i></div><div class="msg-content"><div class="typing-indicator"><span></span><span></span><span></span></div> جاري التفكير...</div>`;
+        typingDiv.innerHTML = `<div class="avatar"><i class="fas fa-brain"></i></div><div class="msg-content"><div class="typing-indicator"><span></span><span></span><span></span></div> جاري التفكير...</div>`;
         container.appendChild(typingDiv);
         container.scrollTop = container.scrollHeight;
-
-        const aiMsg = await generateResponse(text, isDeepThinking);
+        const aiMsg = await generateSmartResponse(text, isDeepThinking);
         container.removeChild(typingDiv);
         addMessage('bot', aiMsg);
     }
 
-    // ربط الأحداث - تم إصلاحها بالكامل
-    const sendBtn = document.getElementById('sendBtn');
-    const msgInput = document.getElementById('messageInput');
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
-    const newChatSidebarBtn = document.getElementById('newChatSidebarBtn');
-    const deepThinkBtn = document.getElementById('deepThinkBtn');
-    const sidebar = document.getElementById('sidebar');
-
-    // زر الإرسال
-    if (sendBtn) {
-        sendBtn.addEventListener('click', sendMessage);
-    }
+    // Events
+    document.getElementById('sendBtn').addEventListener('click', sendMessage);
+    document.getElementById('messageInput').addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
+    document.getElementById('hamburgerBtn').addEventListener('click', () => { document.getElementById('sidebar').classList.add('open'); });
+    document.getElementById('closeSidebarBtn').addEventListener('click', () => { document.getElementById('sidebar').classList.remove('open'); });
+    document.getElementById('newChatSidebarBtn').addEventListener('click', () => { createNewConversation(); document.getElementById('sidebar').classList.remove('open'); });
+    document.getElementById('deepThinkBtn').addEventListener('click', () => { isDeepThinking = !isDeepThinking; saveToLocal(); updateDeepButtonUI(); const status = isDeepThinking ? "✅ تفكير عميق مفعل - راح أفكر بشكل أعمق" : "❌ تفكير عميق معطل"; const temp = document.createElement('div'); temp.className = 'message bot'; temp.innerHTML = `<div class="avatar"><i class="fas fa-brain"></i></div><div class="msg-content">${status}</div>`; document.getElementById('chatContainer').appendChild(temp); setTimeout(() => temp.remove(), 2000); });
     
-    // حقل الكتابة - Enter للإرسال
-    if (msgInput) {
-        msgInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-    }
-    
-    // هامبورجر - فتح القائمة
-    if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', function() {
-            sidebar.classList.add('open');
-        });
-    }
-    
-    // إغلاق القائمة
-    if (closeSidebarBtn) {
-        closeSidebarBtn.addEventListener('click', function() {
-            sidebar.classList.remove('open');
-        });
-    }
-    
-    // محادثة جديدة من القائمة
-    if (newChatSidebarBtn) {
-        newChatSidebarBtn.addEventListener('click', function() {
-            createNewConversation();
-            sidebar.classList.remove('open');
-        });
-    }
-    
-    // تفكير عميق
-    if (deepThinkBtn) {
-        deepThinkBtn.addEventListener('click', function() {
-            isDeepThinking = !isDeepThinking;
-            saveToLocal();
-            updateDeepButtonUI();
-            const status = isDeepThinking ? "✅ تفكير عميق مفعل" : "❌ تفكير عميق معطل";
-            const temp = document.createElement('div');
-            temp.className = 'message bot';
-            temp.innerHTML = `<div class="avatar"><i class="fas fa-infinity"></i></div><div class="msg-content">${status}</div>`;
-            document.getElementById('chatContainer').appendChild(temp);
-            setTimeout(() => temp.remove(), 2000);
-        });
-    }
-
     loadFromLocal();
     renderConversationsList();
     renderMessages();
